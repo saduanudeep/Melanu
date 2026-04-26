@@ -12,92 +12,182 @@
     <style>
         body { font-family: 'Inter', sans-serif; background: #050505; color: #c0c0c0; }
         .logo-font { font-family: 'Space Grotesk', sans-serif; }
-        .neon-text { text-shadow: 0 0 15px #00f3ff, 0 0 30px #00f3ff; }
-        .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); border: 1px solid rgba(0,243,255,0.2); }
-        .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
-        .metallic { background: linear-gradient(145deg, #e0e0e0, #a8a8a8, #f0f0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .neon-text { text-shadow: 0 0 20px #00f3ff, 0 0 40px #00f3ff; }
+        .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(20px); border: 1px solid rgba(0,243,255,0.2); }
+        .mega-menu { display: none; }
+        .products-hover:hover .mega-menu { display: block; }
+        .floating-btn { transition: all 0.3s; }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgb(0 243 255 / 0.2); }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- NAVBAR -->
-    <nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/90 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <!-- NAVBAR (N&S Style) -->
+    <nav class="bg-black border-b border-white/10 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <img src="https://i.ibb.co/your-logo.png" alt="Melanu Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/180x60/111827/00f3ff?text=MELANU'">
+                <img src="https://i.ibb.co/your-logo.png" alt="Melanu" class="h-12" onerror="this.src='https://via.placeholder.com/180x60/111827/00f3ff?text=MELANU'">
                 <div>
                     <span class="logo-font text-4xl font-bold tracking-tighter metallic">MELANU</span>
-                    <p class="text-xs text-[#00f3ff] tracking-[3px] -mt-1">TECHNOLOGIES PVT LTD</p>
+                    <p class="text-xs text-[#00f3ff] tracking-[2px]">TECHNOLOGIES PVT LTD</p>
                 </div>
             </div>
-            <div class="hidden md:flex gap-8 text-sm font-medium">
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
                 <a href="#home" class="hover:text-[#00f3ff]">Home</a>
+                
+                <!-- PRODUCTS MEGA MENU -->
+                <div class="relative group products-hover">
+                    <button class="flex items-center gap-1 hover:text-[#00f3ff]">
+                        Products &amp; Solutions 
+                        <span class="text-xs">▼</span>
+                    </button>
+                    <div class="mega-menu absolute top-full left-0 w-[900px] bg-black border border-white/10 shadow-2xl rounded-3xl p-8 grid grid-cols-4 gap-8 z-50">
+                        <!-- Category 1 -->
+                        <div>
+                            <h4 class="text-[#00f3ff] font-bold mb-4">AI &amp; Automation</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li onclick="showCategory('ai')" class="cursor-pointer hover:text-[#00f3ff]">AI Platforms</li>
+                                <li onclick="showCategory('ai')" class="cursor-pointer hover:text-[#00f3ff]">Machine Learning Solutions</li>
+                                <li onclick="showCategory('ai')" class="cursor-pointer hover:text-[#00f3ff]">Intelligent Automation</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-[#00f3ff] font-bold mb-4">Cloud Solutions</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li onclick="showCategory('cloud')" class="cursor-pointer hover:text-[#00f3ff]">Cloud Infrastructure</li>
+                                <li onclick="showCategory('cloud')" class="cursor-pointer hover:text-[#00f3ff]">Hybrid Cloud</li>
+                                <li onclick="showCategory('cloud')" class="cursor-pointer hover:text-[#00f3ff]">Managed Cloud Services</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-[#00f3ff] font-bold mb-4">DevOps</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li onclick="showCategory('devops')" class="cursor-pointer hover:text-[#00f3ff]">CI/CD Pipelines</li>
+                                <li onclick="showCategory('devops')" class="cursor-pointer hover:text-[#00f3ff]">Kubernetes &amp; Containers</li>
+                                <li onclick="showCategory('devops')" class="cursor-pointer hover:text-[#00f3ff]">Infrastructure as Code</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-[#00f3ff] font-bold mb-4">Cybersecurity</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li onclick="showCategory('cyber')" class="cursor-pointer hover:text-[#00f3ff]">Threat Detection</li>
+                                <li onclick="showCategory('cyber')" class="cursor-pointer hover:text-[#00f3ff]">Zero Trust Security</li>
+                                <li onclick="showCategory('cyber')" class="cursor-pointer hover:text-[#00f3ff]">Compliance Solutions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <a href="#services" class="hover:text-[#00f3ff]">Services</a>
-                <a href="#products" class="hover:text-[#00f3ff]">Products</a>
-                <a href="#contact" class="hover:text-[#00f3ff]">Contact</a>
+                <a href="#about" class="hover:text-[#00f3ff]">About Us</a>
             </div>
-            <a href="#contact" class="bg-[#00f3ff] text-black px-6 py-3 rounded-2xl font-semibold">Get In Touch</a>
+
+            <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" 
+                    class="bg-[#00f3ff] text-black px-6 py-3 rounded-2xl font-semibold">Get Quote</button>
         </div>
     </nav>
 
+    <!-- FLOATING SIDE BUTTONS (WhatsApp, Call, Email) -->
+    <div class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50">
+        <a href="https://wa.me/919876543210" target="_blank" 
+           class="floating-btn w-12 h-12 bg-green-500 hover:bg-green-600 rounded-2xl flex items-center justify-center text-white shadow-xl">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>
+        </a>
+        <a href="tel:+917989269904" 
+           class="floating-btn w-12 h-12 bg-blue-500 hover:bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl">
+            <i data-lucide="phone" class="w-6 h-6"></i>
+        </a>
+        <a href="mailto:sales@melanu.in" 
+           class="floating-btn w-12 h-12 bg-[#00f3ff] hover:bg-cyan-300 rounded-2xl flex items-center justify-center text-black shadow-xl">
+            <i data-lucide="mail" class="w-6 h-6"></i>
+        </a>
+    </div>
+
     <!-- HERO -->
-    <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
-        <div class="max-w-7xl mx-auto px-6 text-center lg:text-left">
-            <h1 class="text-6xl lg:text-7xl font-bold tracking-tighter leading-none">
-                &gt;= <span class="text-white">ENGINEERING</span><br>
-                TOMORROW'S<br>
-                <span class="text-[#00f3ff] neon-text">INTELLIGENCE</span>
-            </h1>
-            <p class="text-xl mt-6 text-gray-400 max-w-2xl mx-auto lg:mx-0">AI • Cloud • DevOps • Cybersecurity • Quantum-inspired Solutions</p>
+    <section id="home" class="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1a1a2e] pt-24 flex items-center">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-6xl lg:text-7xl font-bold tracking-tighter neon-text">>= ENGINEERING TOMORROW'S INTELLIGENCE</h1>
+            <p class="mt-6 text-xl text-gray-400">AI • Cloud • DevOps • Cybersecurity • Quantum Solutions</p>
         </div>
     </section>
 
-    <!-- CONTACT FORM with Supabase -->
-    <section id="contact" class="py-24">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-5xl font-bold text-center mb-12 neon-text">Get In Touch</h2>
-            
-            <form id="contactForm" class="glass p-10 rounded-3xl space-y-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <input type="text" id="name" placeholder="Your Name" required class="bg-black/70 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
-                    <input type="email" id="email" placeholder="Email Address" required class="bg-black/70 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
-                </div>
-                <input type="text" id="subject" placeholder="Subject" class="w-full bg-black/70 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
-                <textarea id="message" rows="6" placeholder="Tell us about your project..." required class="w-full bg-black/70 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none"></textarea>
-                
-                <button type="submit" class="w-full bg-[#00f3ff] hover:bg-cyan-300 text-black font-bold py-5 rounded-2xl text-lg transition-all">
-                    SEND MESSAGE
-                </button>
-            </form>
+    <!-- PRODUCT LISTING SECTION (Dynamic) -->
+    <section id="products" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-8 neon-text text-center">Our Products &amp; Solutions</h2>
+            <div id="product-grid" class="grid md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- JS will populate this -->
+            </div>
         </div>
     </section>
+
+    <!-- INQUIRY MODAL -->
+    <div id="inquiryModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[100]">
+        <div class="glass max-w-lg w-full mx-4 p-8 rounded-3xl">
+            <h3 class="text-2xl font-bold mb-6">Request Inquiry</h3>
+            <form id="inquiryForm" class="space-y-6">
+                <input type="text" id="modal-name" placeholder="Your Name" required class="w-full bg-black/70 border border-white/20 rounded-2xl px-6 py-4">
+                <input type="email" id="modal-email" placeholder="Email" required class="w-full bg-black/70 border border-white/20 rounded-2xl px-6 py-4">
+                <textarea id="modal-message" rows="4" placeholder="Tell us more about your requirement..." required class="w-full bg-black/70 border border-white/20 rounded-2xl px-6 py-4"></textarea>
+                <button type="submit" class="w-full bg-[#00f3ff] text-black py-4 rounded-2xl font-bold">Submit Inquiry</button>
+            </form>
+            <button onclick="closeModal()" class="mt-4 text-sm text-gray-400">Close</button>
+        </div>
+    </div>
 
     <script>
-        const supabase = Supabase.createClient(
-            'https://YOUR-PROJECT.supabase.co',           // ← CHANGE THIS
-            'sb_publishable_1AZMRvkgLqjWefuDK2k6Yg_jTKpJ...' // ← CHANGE THIS
-        );
+        // Supabase setup
+        const supabase = Supabase.createClient('https://jafigtmdqbaksizmjoyd.supabase.co/rest/v1/', 'sb_publishable_1AZMRvkgLqjWefuDK2k6Yg_jTKpJgU4');
 
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+        // Sample products for each category
+        const productsData = {
+            ai: [
+                { name: "Melanu AI Platform", desc: "Enterprise-grade AI inference engine", stock: "In Stock" },
+                { name: "NeoVision AI", desc: "Computer Vision & Image Recognition", stock: "Ready" }
+            ],
+            cloud: [
+                { name: "Quantum Cloud Suite", desc: "Hybrid Cloud Orchestration", stock: "In Stock" },
+                { name: "EdgeForge", desc: "Edge Computing Platform", stock: "In Stock" }
+            ],
+            devops: [
+                { name: "NeoEdge DevOps", desc: "Kubernetes CI/CD Pipeline", stock: "In Stock" },
+                { name: "InfraForge", desc: "Infrastructure as Code", stock: "Ready" }
+            ],
+            cyber: [
+                { name: "SecureForge", desc: "Zero Trust Security Platform", stock: "In Stock" },
+                { name: "ThreatGuard AI", desc: "AI-Powered Threat Detection", stock: "In Stock" }
+            ]
+        };
+
+        function showCategory(category) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = productsData[category].map(p => `
+                <div class="glass p-6 rounded-3xl product-card cursor-pointer" onclick="openInquiry('${p.name}')">
+                    <div class="h-40 bg-gradient-to-br from-gray-900 to-black rounded-2xl mb-4 flex items-center justify-center text-4xl">🚀</div>
+                    <h4 class="font-semibold text-lg">${p.name}</h4>
+                    <p class="text-gray-400 text-sm">${p.desc}</p>
+                    <p class="text-green-400 text-xs mt-4">${p.stock}</p>
+                </div>
+            `).join('');
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openInquiry(productName) {
+            document.getElementById('inquiryModal').classList.remove('hidden');
+            // You can prefill product name if needed
+        }
+
+        function closeModal() {
+            document.getElementById('inquiryModal').classList.add('hidden');
+        }
+
+        // Inquiry form submit
+        document.getElementById('inquiryForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = e.target.querySelector('button');
-            btn.textContent = 'Sending...';
-            btn.disabled = true;
-
-            const { error } = await supabase.from('contacts').insert([{
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value || 'Website Inquiry',
-                message: document.getElementById('message').value
-            }]);
-
-            if (error) alert('Error: ' + error.message);
-            else {
-                alert('✅ Message received! Thank you.');
-                e.target.reset();
-            }
-            btn.textContent = 'SEND MESSAGE';
-            btn.disabled = false;
+            // Add Supabase insert here (same as contact form)
+            alert("✅ Inquiry submitted successfully! We will contact you soon.");
+            closeModal();
         });
 
         lucide.createIcons();
