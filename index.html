@@ -3,356 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melanu Technologies | Leading Discrete Semiconductor Manufacturer</title>
-    <!-- Tailwind CSS -->
+    <title>Melanu Technologies Pvt Ltd | >= Engineering Tomorrow</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Lucide Icons Core -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
     <style>
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; overflow-x: hidden; }
-        .nav-link { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
-        .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-        .mega-menu { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-top: 1px solid #e2e8f0; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
-        .text-blue-primary { color: #3b82f6; }
-        .bg-blue-primary { background-color: #3b82f6; }
-        
-        /* Matching Logo Text Gradient from File */
-        .logo-text {
-            background: linear-gradient(to bottom, #1e293b 0%, #334155 50%, #64748b 100%);
+        :root {
+            --neon: #00f3ff;
+            --silver: #c0c0c0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050505;
+            color: #c0c0c0;
+            overflow-x: hidden;
+        }
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .neon-text {
+            text-shadow: 0 0 10px var(--neon),
+                        0 0 20px var(--neon),
+                        0 0 40px var(--neon);
+        }
+        .glass {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+        }
+        .metallic {
+            background: linear-gradient(145deg, #c0c0c0, #a0a0a0, #e0e0e0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-style: italic;
         }
-        
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
     </style>
 </head>
-<body>
-    <div id="root"></div>
-
-    <!-- React and Dependencies -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
-
-    <script type="text/babel">
-        const { useState, useEffect, useMemo, useRef } = React;
-        const { motion, AnimatePresence } = window.Motion;
-
-        // --- ICON COMPONENT (Robust Fallback) ---
-        const Icon = ({ name, size = 20, className = "" }) => {
-            return <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
-        };
-
-        // --- DATA ---
-        const PRODUCT_CATEGORIES = [
-            { name: "Diodes", sub: ["Switching", "Schottky", "Zener", "TVS"], icon: "zap" },
-            { name: "Rectifiers", sub: ["General Purpose", "Fast Recovery", "Bridge"], icon: "activity" },
-            { name: "MOSFETs", sub: ["Trench", "Super Junction", "SiC Power"], icon: "cpu" },
-            { name: "Transistors", sub: ["Bipolar (BJT)", "Digital Transistors"], icon: "circuit-board" },
-            { name: "Protection", sub: ["ESD Protection", "Chip Fuses"], icon: "shield-check" },
-            { name: "LCD Modules", sub: ["TFT Modules", "OLED Panels", "Samsung"], icon: "monitor" }
-        ];
-
-        const FEATURED_PRODUCTS = [
-            { id: "MN-SGT-40N", name: "N-Channel SGT MOSFET", specs: "30V, 282A, 0.55mΩ", pkg: "PPAK5x6", sector: "EV" },
-            { id: "MN-TVS-05", name: "Quad TVS Array", specs: "Ultra-low Cap, Fast", pkg: "DFN2510", sector: "Electronics" },
-            { id: "MN-SIC-650", name: "SiC Power MOSFET", specs: "650V, 70A, 37mΩ", pkg: "TO-247", sector: "Aero" },
-            { id: "MN-Z-5V6", name: "Zener Diode 5.6V", specs: "500mW, Low Leakage", pkg: "SOD-123", sector: "Industrial" }
-        ];
-
-        // --- COMPONENTS ---
-        const Logo = ({ light = false }) => (
-            <div className="flex items-center gap-3 cursor-pointer group">
-                <div className="w-10 h-10 bg-slate-900 border border-blue-500/50 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                    <span className="text-white font-mono text-lg font-black italic">{'>='}</span>
-                </div>
-                <div className="flex flex-col leading-none">
-                    <span className={`text-xl font-black uppercase tracking-tighter italic ${light ? 'text-white' : 'logo-text'}`}>Melanu</span>
-                    <span className="text-[7px] font-bold text-blue-500 uppercase tracking-[0.2em] mt-0.5">Technologies Pvt Ltd</span>
+<body class="min-h-screen">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <img src="https://i.imgur.com/YOUR-LOGO-LINK.png" alt="Melanu Logo" class="h-12 w-auto" id="logo-img">
+                <!-- Replace above with your actual logo URL or base64 if needed -->
+                <div>
+                    <span class="logo-font text-4xl font-bold tracking-tighter metallic">MELANU</span>
+                    <p class="text-[10px] text-[#00f3ff] tracking-[2px] -mt-1">TECHNOLOGIES PVT LTD</p>
                 </div>
             </div>
-        );
 
-        const Navbar = ({ setView, isScrolled, megaMenu, setMegaMenu }) => (
-            <header className="fixed top-0 w-full z-[1000]">
-                {/* Utility Bar */}
-                <div className="bg-slate-950 text-white py-2 px-10 border-b border-white/5 hidden md:flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                    <div className="flex gap-8">
-                        <span className="flex items-center gap-2"><Icon name="phone" size={12} className="text-blue-500"/> +91 7989269904</span>
-                        <span className="flex items-center gap-2"><Icon name="mail" size={12} className="text-blue-500"/> sales@melanu.in</span>
-                    </div>
-                    <div className="flex gap-6 items-center">
-                        <span className="hover:text-blue-400 cursor-pointer">Quality</span>
-                        <span className="hover:text-blue-400 cursor-pointer">Environment</span>
-                        <span className="flex items-center gap-2 border-l border-white/10 pl-4">
-                            <Icon name="globe" size={12}/> EN
-                        </span>
-                    </div>
-                </div>
-
-                {/* Main Nav */}
-                <nav 
-                    className={`w-full transition-all duration-300 ${isScrolled ? 'bg-white shadow-xl py-3' : 'bg-white/95 py-6 border-b border-slate-100'}`}
-                    onMouseLeave={() => setMegaMenu(null)}
-                >
-                    <div className="max-w-[1400px] mx-auto px-10 flex justify-between items-center">
-                        <div onClick={() => setView('home')}><Logo /></div>
-                        
-                        <div className="hidden lg:flex items-center gap-10">
-                            <button 
-                                onMouseEnter={() => setMegaMenu('products')}
-                                className={`nav-link flex items-center gap-2 ${isScrolled ? 'text-slate-700' : 'text-slate-900'} hover:text-blue-600`}
-                            >
-                                Products <Icon name="chevron-down" size={14}/>
-                            </button>
-                            <button onClick={() => setView('home')} className="nav-link text-slate-700 hover:text-blue-600">Applications</button>
-                            <button onClick={() => setView('home')} className="nav-link text-slate-700 hover:text-blue-600">Quality</button>
-                            <button onClick={() => setView('home')} className="nav-link text-slate-700 hover:text-blue-600">About Us</button>
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                            <div className="relative hidden xl:block">
-                                <Icon name="search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"/>
-                                <input placeholder="SEARCH..." className="pl-10 pr-4 py-2 bg-slate-100 border-none rounded text-[10px] font-bold w-40 focus:w-56 transition-all outline-none" />
-                            </div>
-                            <button onClick={() => setView('rfq')} className="bg-blue-primary hover:bg-blue-700 text-white px-6 py-2 rounded-sm text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-blue-500/20">
-                                Request Quote
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Mega Menu */}
-                    <AnimatePresence>
-                        {megaMenu === 'products' && (
-                            <motion.div 
-                                initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-                                className="absolute top-full left-0 w-full mega-menu p-12"
-                            >
-                                <div className="max-w-[1400px] mx-auto grid grid-cols-6 gap-10">
-                                    {PRODUCT_CATEGORIES.map(cat => (
-                                        <div key={cat.name} className="space-y-4">
-                                            <div className="flex items-center gap-2 text-blue-600 border-b border-slate-100 pb-3">
-                                                <Icon name={cat.icon} size={16}/>
-                                                <h4 className="text-xs font-black uppercase tracking-widest">{cat.name}</h4>
-                                            </div>
-                                            <ul className="space-y-2">
-                                                {cat.sub.map(s => (
-                                                    <li key={s} onClick={() => {setView('catalog'); setMegaMenu(null);}} className="text-[10px] font-bold text-slate-500 hover:text-blue-600 cursor-pointer uppercase transition-colors">
-                                                        {s}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </nav>
-            </header>
-        );
-
-        const HomeView = ({ setView }) => (
-            <div className="animate-in fade-in duration-1000">
-                {/* Banner - Inspired by Good-Ark Slider */}
-                <section className="relative h-[650px] hero-gradient flex items-center overflow-hidden">
-                    <div className="absolute inset-0 opacity-20">
-                        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,_#3b82f6_0%,_transparent_70%)]"></div>
-                        <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '60px 60px'}}></div>
-                    </div>
-                    
-                    <div className="max-w-[1400px] mx-auto px-10 relative z-10 w-full grid lg:grid-cols-2 gap-20">
-                        <div className="text-white space-y-8">
-                            <span className="text-blue-500 font-black text-xs uppercase tracking-[0.4em] border-l-4 border-blue-600 pl-4 block">World-Class Semiconductor Excellence</span>
-                            <h1 className="text-6xl md:text-7xl font-black leading-tight tracking-tighter uppercase italic">
-                                Discrete <br/><span className="text-blue-500">Solutions</span> <br/>for EV & Aero
-                            </h1>
-                            <p className="text-lg text-slate-400 max-w-xl font-medium leading-relaxed italic">
-                                Melanu Technologies is a leading Indian professional manufacturer & distributor specializing in high-reliability discrete semiconductor devices.
-                            </p>
-                            <div className="flex gap-6">
-                                <button onClick={() => setView('catalog')} className="bg-blue-primary px-10 py-4 font-black uppercase text-xs tracking-widest shadow-xl shadow-blue-500/30">Browse Products</button>
-                                <button className="border-2 border-white/20 hover:border-blue-500 px-10 py-4 font-black uppercase text-xs tracking-widest transition-all">About Melanu</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Categories Grid */}
-                <section className="py-24 max-w-[1400px] mx-auto px-10">
-                    <div className="flex justify-between items-end mb-16 border-b pb-8">
-                        <div>
-                            <h2 className="text-4xl font-black uppercase tracking-tighter italic text-slate-900">Product Families</h2>
-                            <p className="text-slate-500 font-bold text-xs uppercase tracking-widest mt-2">Comprehensive semiconductor archive</p>
-                        </div>
-                        <button onClick={() => setView('catalog')} className="text-blue-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-2 hover:underline">View All <Icon name="chevron-right" size={14}/></button>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {PRODUCT_CATEGORIES.map(cat => (
-                            <div key={cat.name} className="bg-white p-10 rounded-xl border border-slate-100 product-card transition-all group">
-                                <div className="w-12 h-12 bg-slate-50 text-blue-600 rounded-lg flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                                    <Icon name={cat.icon} size={24}/>
-                                </div>
-                                <h3 className="text-xl font-black text-slate-900 mb-4 uppercase italic tracking-tighter">{cat.name}</h3>
-                                <ul className="space-y-2 mb-8">
-                                    {cat.sub.map(s => <li key={s} className="text-[11px] font-bold text-slate-500 flex items-center gap-2 uppercase tracking-widest"> <div className="w-1 h-1 bg-blue-500 rounded-full"/> {s} </li>)}
-                                </ul>
-                                <button onClick={() => setView('catalog')} className="text-[9px] font-black text-blue-600 uppercase tracking-[0.2em] flex items-center gap-2 group-hover:gap-4 transition-all">Explore Family <Icon name="arrow-right" size={12}/></button>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Quality Section */}
-                <section className="py-24 bg-slate-900 text-white">
-                    <div className="max-w-[1400px] mx-auto px-10 grid lg:grid-cols-2 gap-20 items-center">
-                        <div className="space-y-8">
-                            <h2 className="text-5xl font-black uppercase italic tracking-tighter">Quality & <span className="text-blue-500">Reliability</span></h2>
-                            <p className="text-lg text-slate-400 font-medium leading-relaxed italic">
-                                Melanu Technologies maintains high standards across its supply chain, aligning with ISO9001 and IATF16949 certification paths for automotive excellence.
-                            </p>
-                            <div className="grid grid-cols-2 gap-4">
-                                {['ISO9001:2015', 'ISO14001:2015', 'IATF16949', 'AEC-Q101'].map(cert => (
-                                    <div key={cert} className="bg-white/5 border border-white/10 p-4 flex items-center gap-4 rounded group hover:bg-blue-600 transition-all cursor-default">
-                                        <Icon name="award" size={18} className="text-blue-500 group-hover:text-white"/>
-                                        <span className="text-[10px] font-black uppercase tracking-widest">{cert}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="relative">
-                            <div className="aspect-video bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center group overflow-hidden">
-                                <Icon name="factory" size={80} className="text-white/10 group-hover:scale-110 transition-transform duration-700"/>
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent"></div>
-                                <div className="absolute bottom-8 left-8">
-                                    <span className="text-blue-500 font-black text-[9px] uppercase tracking-widest mb-2 block">Our Node</span>
-                                    <h4 className="text-xl font-black italic uppercase">Primary Engineering HQ</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#home" class="hover:text-[#00f3ff] transition-colors">Home</a>
+                <a href="#about" class="hover:text-[#00f3ff] transition-colors">About</a>
+                <a href="#services" class="hover:text-[#00f3ff] transition-colors">Services</a>
+                <a href="#products" class="hover:text-[#00f3ff] transition-colors">Products</a>
+                <a href="#contact" class="hover:text-[#00f3ff] transition-colors">Contact</a>
             </div>
-        );
 
-        const CatalogView = ({ setView }) => (
-            <div className="pt-48 pb-32 bg-slate-50 min-h-screen">
-                <div className="max-w-[1400px] mx-auto px-10">
-                    <div className="flex justify-between items-center mb-12">
-                        <h2 className="text-4xl font-black uppercase italic tracking-tighter">Parametric Archive</h2>
-                        <div className="flex gap-4">
-                            <button className="p-3 bg-white border border-slate-200 rounded-xl hover:bg-blue-50 text-blue-600"><Icon name="download" size={20}/></button>
-                            <button className="p-3 bg-white border border-slate-200 rounded-xl hover:bg-blue-50 text-blue-600"><Icon name="printer" size={20}/></button>
-                        </div>
-                    </div>
-                    <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
-                        <table className="w-full text-left">
-                            <thead className="bg-slate-950 text-white uppercase text-[9px] font-black tracking-widest">
-                                <tr>
-                                    <th className="px-10 py-8">Part Number</th>
-                                    <th className="px-10 py-8">Sector</th>
-                                    <th className="px-10 py-8">Key Engineering Specs</th>
-                                    <th className="px-10 py-8">Package</th>
-                                    <th className="px-10 py-8 text-right">Access</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-100 text-slate-800 font-bold">
-                                {FEATURED_PRODUCTS.map(p => (
-                                    <tr key={p.id} className="hover:bg-blue-50/30 transition-all cursor-pointer group">
-                                        <td className="px-10 py-10 font-black text-blue-600 text-sm tracking-tighter">{p.id}</td>
-                                        <td className="px-10 py-10"><Badge variant={p.sector.toLowerCase()}>{p.sector}</Badge></td>
-                                        <td className="px-10 py-10 text-[11px] font-mono leading-relaxed">{p.specs}</td>
-                                        <td className="px-10 py-10 text-[10px] font-black text-slate-400 uppercase">{p.pkg}</td>
-                                        <td className="px-10 py-10 text-right"><Icon name="chevron-right" size={24} className="inline-block text-slate-300 group-hover:text-blue-600"/></td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+            <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+                class="bg-[#00f3ff] hover:bg-cyan-300 text-black px-6 py-3 rounded-xl font-semibold text-sm transition-all">
+                Get In Touch
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 bg-white/5 border border-[#00f3ff]/30 px-4 py-2 rounded-full">
+                    <span class="w-2 h-2 bg-[#00f3ff] rounded-full animate-pulse"></span>
+                    <span class="text-xs uppercase tracking-widest font-mono text-[#00f3ff]">Deep Tech Innovation</span>
+                </div>
+                
+                <h1 class="text-6xl lg:text-7xl font-bold tracking-tighter leading-none">
+                    &gt;= <span class="text-white">ENGINEERING</span><br>
+                    TOMORROW'S<br>
+                    <span class="text-[#00f3ff] neon-text">INTELLIGENCE</span>
+                </h1>
+                
+                <p class="text-xl text-gray-400 max-w-lg">
+                    Futuristic Cloud, AI, Quantum-inspired solutions and Enterprise Technology Services.
+                </p>
+                
+                <div class="flex gap-4">
+                    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+                        class="bg-[#00f3ff] text-black px-8 py-4 rounded-2xl font-semibold hover:scale-105 transition">
+                        Start a Project
+                    </button>
+                    <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"
+                        class="border border-[#00f3ff]/50 hover:border-[#00f3ff] px-8 py-4 rounded-2xl font-semibold transition">
+                        Explore Innovations
+                    </button>
                 </div>
             </div>
+            
+            <div class="relative">
+                <img src="https://i.imgur.com/YOUR-LOGO-LINK.png" alt="Melanu Logo" class="w-full max-w-lg mx-auto drop-shadow-2xl" id="hero-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-16 neon-text">Our Expertise</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Add 6 service cards here - I can expand if you want -->
+                <div class="glass p-8 rounded-3xl group hover:scale-105 transition-all">
+                    <div class="text-[#00f3ff] mb-6"><i data-lucide="cloud" class="w-12 h-12"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3">Cloud Solutions</h3>
+                    <p class="text-gray-400">Enterprise-grade cloud infrastructure and migration.</p>
+                </div>
+                <!-- Repeat similar cards for AI, DevOps, Cybersecurity, etc. -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT WITH SUPABASE -->
+    <section id="contact" class="py-24 bg-black/95">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-16 neon-text">Let's Build the Future</h2>
+            
+            <form id="contactForm" class="glass p-10 rounded-3xl space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input type="text" id="name" placeholder="Full Name" required
+                        class="bg-black/50 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
+                    <input type="email" id="email" placeholder="Business Email" required
+                        class="bg-black/50 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
+                </div>
+                <input type="text" id="subject" placeholder="Subject" 
+                    class="w-full bg-black/50 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
+                <textarea id="message" rows="6" placeholder="Tell us about your project..." required
+                    class="w-full bg-black/50 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none"></textarea>
+                
+                <button type="submit"
+                    class="w-full bg-[#00f3ff] hover:bg-cyan-300 text-black font-bold py-5 rounded-2xl text-lg transition-all">
+                    SEND MESSAGE
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Supabase Configuration
+        const supabase = Supabase.createClient(
+            'YOUR_SUPABASE_URL',           // ← Replace
+            'YOUR_SUPABASE_ANON_KEY'       // ← Replace with publishable key
         );
 
-        const App = () => {
-            const [view, setView] = useState('home');
-            const [isScrolled, setIsScrolled] = useState(false);
-            const [megaMenu, setMegaMenu] = useState(null);
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
 
-            useEffect(() => {
-                const handleScroll = () => setIsScrolled(window.scrollY > 40);
-                window.addEventListener('scroll', handleScroll);
-                lucide.createIcons(); // Initialize static icons
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
 
-            useEffect(() => {
-                lucide.createIcons(); // Re-initialize on view change
-                window.scrollTo(0, 0);
-            }, [view, megaMenu]);
+            const { error } = await supabase.from('contacts').insert([formData]);
+            
+            if (error) {
+                alert('Error: ' + error.message);
+            } else {
+                alert('✅ Thank you! Your message has been received.');
+                e.target.reset();
+            }
+            
+            btn.textContent = 'SEND MESSAGE';
+            btn.disabled = false;
+        });
 
-            return (
-                <div className="min-h-screen">
-                    <Navbar view={view} setView={setView} isScrolled={isScrolled} megaMenu={megaMenu} setMegaMenu={setMegaMenu} />
-                    
-                    <main>
-                        {view === 'home' && <HomeView setView={setView} />}
-                        {view === 'catalog' && <CatalogView setView={setView} />}
-                        {['rfq', 'aitools'].includes(view) && (
-                            <div className="pt-60 pb-40 text-center">
-                                <h1 className="text-8xl font-black uppercase italic tracking-tighter text-slate-100">{view}_node</h1>
-                                <div className="mt-8 flex items-center justify-center gap-6 text-blue-500 font-black uppercase text-xs tracking-[1.5em]">
-                                    <Icon name="loader-2" size={32} className="animate-spin"/> Synchronizing Operations
-                                </div>
-                            </div>
-                        )}
-                    </main>
-
-                    <footer className="bg-slate-950 text-white pt-48 pb-20 border-t-8 border-blue-600">
-                        <div className="max-w-[1400px] mx-auto px-10">
-                            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-32 mb-40">
-                                <div className="lg:col-span-2 space-y-12">
-                                    <Logo light />
-                                    <p className="text-slate-400 text-xs max-w-sm leading-relaxed font-black italic uppercase tracking-[0.2em]">
-                                        India's Strategic Integrated Platform for High-Reliability Silicon. Connecting global manufacturing fab clusters to local industrial nodes.
-                                    </p>
-                                    <div className="flex gap-8">
-                                        {['share-2', 'globe', 'activity'].map(ico => (
-                                            <div key={ico} className="w-14 h-14 border border-white/10 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all cursor-pointer">
-                                                <Icon name={ico} size={24}/>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                {['Products', 'Corporate', 'Support'].map(g => (
-                                    <div key={g}>
-                                        <h4 className="text-[11px] font-black text-blue-500 uppercase tracking-[0.6em] mb-12 italic underline underline-offset-8">{g}</h4>
-                                        <ul className="space-y-8 text-[10px] font-black text-slate-500 uppercase tracking-[0.4em]">
-                                            <li className="hover:text-white cursor-pointer">Archive</li>
-                                            <li className="hover:text-white cursor-pointer">Quality Hub</li>
-                                            <li className="hover:text-white cursor-pointer">Contact Node</li>
-                                        </ul>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="pt-20 border-t border-white/5 flex justify-between text-[11px] font-black text-slate-800 tracking-[1em] uppercase italic">
-                                <p>© 2026 Melanu Technologies Pvt Ltd.</p>
-                                <div className="flex gap-20"><span>IN-HQ-NODE</span><span>v2.9.2-STABLE</span></div>
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
