@@ -1,601 +1,183 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { 
-  Menu, X, Phone, Mail, MapPin, Search, Cpu, Truck, Settings, ShieldCheck, 
-  Zap, Layers, Database, Cable, Monitor, Radio, ArrowRight, CheckCircle2, 
-  Factory, Car, Smartphone, CircuitBoard, Globe, Users, FileText, Upload, 
-  Filter, Download, ChevronDown, User, LogIn, LayoutDashboard, ShoppingCart,
-  BarChart3, Bot, Sparkles, AlertCircle, TrendingUp, History, Heart, ClipboardCheck,
-  Building2, Briefcase, ChevronRight, Share2, Printer, Wind, Lightbulb, Box, Terminal, Activity,
-  Send, Loader2, Award, ExternalLink, Microscope, Gauge, HardDrive, Cpu as ChipIcon,
-  Navigation, Plane, Battery, RefreshCw, Layers as LayersIcon
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melanu Technologies | Strategic Silicon Solutions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #fff; }
+        .italic-caps { font-style: italic; text-transform: uppercase; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #02040a; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-// --- GEMINI API CONFIGURATION ---
-const apiKey = ""; 
-const GEMINI_MODEL = "gemini-2.5-flash-preview-09-2025";
+    <!-- React and Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
 
-const callGeminiAPI = async (prompt, systemPrompt = "") => {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
-  const payload = {
-    contents: [{ parts: [{ text: prompt }] }],
-    systemInstruction: { parts: [{ text: systemPrompt }] }
-  };
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    const data = await response.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Response unavailable.";
-  } catch (error) { return "Connection error."; }
-};
+    <script type="text/babel">
+        const { useState, useEffect, useMemo, useRef } = React;
+        const { motion, AnimatePresence } = window.Motion;
 
-// --- ENTERPRISE ENGINEERING DATABASE ---
-const CATEGORIES = [
-  {
-    id: "ics",
-    name: "Integrated Circuits",
-    sub: [
-      { name: "PMIC - Battery Management", count: 840 },
-      { name: "Embedded - Microcontrollers", count: 2100 },
-      { name: "Logic - Buffers/Drivers", count: 1200 },
-      { name: "Interface - CAN/RS485", count: 950 },
-      { name: "Memory - Flash/eMMC", count: 620 }
-    ],
-    icon: <ChipIcon size={20}/>
-  },
-  {
-    id: "discrete",
-    name: "Discrete Semiconductors",
-    sub: [
-      { name: "SiC MOSFETs (EV Grade)", count: 180 },
-      { name: "IGBT Modules", count: 320 },
-      { name: "Bridge Rectifiers", count: 450 },
-      { name: "TVS Diodes", count: 1100 }
-    ],
-    icon: <Zap size={20}/>
-  },
-  {
-    id: "displays",
-    name: "Visual & LCD",
-    sub: [
-      { name: "TFT LCD Modules", count: 430 },
-      { name: "OLED Graphic Displays", count: 280 },
-      { name: "Touch Screen Panels", count: 150 },
-      { name: "LCD Inverters", count: 90 }
-    ],
-    icon: <Monitor size={20}/>
-  },
-  {
-    id: "aerospace",
-    name: "Aerospace & Defense",
-    sub: [
-      { name: "MIL-DTL Connectors", count: 210 },
-      { name: "Rad-Hardened ICs", count: 85 },
-      { name: "RF Amplifiers", count: 340 },
-      { name: "Precision Oscillators", count: 120 }
-    ],
-    icon: <Plane size={20}/>
-  },
-  {
-    id: "sensors",
-    name: "Sensors & IoT",
-    sub: [
-      { name: "Pressure Transducers", count: 560 },
-      { name: "Motion Imus", count: 230 },
-      { name: "Temperature - NTC/PTC", count: 890 },
-      { name: "RFID Modules", count: 140 }
-    ],
-    icon: <Radio size={20}/>
-  }
-];
+        // Icons placeholder for CDN usage
+        const Icon = ({ name, size = 20, className = "" }) => {
+            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        };
 
-const PRODUCTS = [
-  { id: "MN-BMS-EV700", name: "EV-Grade Battery Management IC", category: "ics", sub: "PMIC - Battery Management", specs: { vds: "800V", id: "BMS Cluster", rds: "N/A", pkg: "HTQFP-64" }, status: "Active", sector: "EV" },
-  { id: "MN-SIC-1200V60A", name: "Silicon Carbide MOSFET", category: "discrete", sub: "SiC MOSFETs (EV Grade)", specs: { vds: "1200V", id: "60A", rds: "25mΩ", pkg: "TO-247-3" }, status: "New", sector: "EV" },
-  { id: "MN-MIL-38999", name: "Circular MIL-Spec Connector", category: "aerospace", sub: "MIL-DTL Connectors", specs: { vds: "500V", id: "Signal/Power", rds: "Shielded", pkg: "Series III" }, status: "Active", sector: "Aerospace" },
-  { id: "MN-TFT-104", name: "10.4\" Industrial LCD Module", category: "displays", sub: "TFT LCD Modules", specs: { vds: "LVDS", id: "1024x768", rds: "450 nits", pkg: "Metal Frame" }, status: "Active", sector: "Industrial" },
-  { id: "MN-MCU-STM32", name: "High-Perf ARM Cortex-M7", category: "ics", sub: "Embedded - Microcontrollers", specs: { vds: "3.3V", id: "400MHz", rds: "2MB Flash", pkg: "LQFP-144" }, status: "Active", sector: "Electronics" },
-  { id: "MN-RF-AMP-G5", name: "Ka-Band RF Amplifier", category: "aerospace", sub: "RF Amplifiers", specs: { vds: "28V", id: "GaN Tech", rds: "S-Band", pkg: "Hermetic" }, status: "Restricted", sector: "Aerospace" }
-];
+        // --- GEMINI API CONFIG ---
+        const apiKey = ""; 
+        const GEMINI_MODEL = "gemini-2.5-flash-preview-09-2025";
 
-const APPLICATIONS = [
-  { name: "Automotive", icon: <Car />, desc: "AEC-Q101 Qualified Discrete Solutions" },
-  { name: "Industrial", icon: <Factory />, desc: "High Reliability Power Management" },
-  { name: "Renewable", icon: <Wind />, desc: "SiC & IGBT Modules for Solar Inverters" },
-  { name: "Consumer", icon: <Smartphone />, desc: "Ultra-low Profile Protection for Mobile" }
-];
+        const callGeminiAPI = async (prompt, systemPrompt = "") => {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Response unavailable.";
+            } catch (error) { return "Connection error."; }
+        };
 
-// --- STYLED COMPONENTS ---
+        // --- DATA ---
+        const CATEGORIES = [
+            { id: "ics", name: "Integrated Circuits", icon: "cpu" },
+            { id: "discrete", name: "Discrete Semi", icon: "zap" },
+            { id: "displays", name: "LCD Panels", icon: "monitor" },
+            { id: "aerospace", name: "Aerospace", icon: "plane" },
+            { id: "sensors", name: "Sensors", icon: "microscope" }
+        ];
 
-const SectionHeader = ({ title, subtitle, light = false }) => (
-  <div className="mb-12">
-    <h2 className={`text-4xl font-black uppercase tracking-tighter italic mb-4 ${light ? 'text-white' : 'text-slate-900'}`}>
-      {title}
-    </h2>
-    <div className="w-20 h-1.5 bg-blue-600 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
-    <p className={`max-w-2xl text-lg font-medium ${light ? 'text-slate-400' : 'text-slate-500'}`}>{subtitle}</p>
-  </div>
-);
+        const PRODUCTS = [
+            { id: "MN-BMS-EV800", name: "EV-Grade Smart BMS", sector: "EV", specs: "800V Architecture", pkg: "HTQFP-64" },
+            { id: "MN-SIC-1200", name: "Gen3 SiC MOSFET", sector: "EV", specs: "1200V / 100A", pkg: "TO-247-4" },
+            { id: "MN-RAD-MCU-7", name: "Rad-Hardened M7", sector: "Aero", specs: "400MHz Core", pkg: "CLCC-144" }
+        ];
 
-const Logo = ({ light = false }) => (
-  <div className="flex items-center gap-4 cursor-pointer group">
-    <div className="relative w-12 h-12 bg-slate-950 rounded-xl border border-blue-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.3)] group-hover:scale-105 transition-transform">
-      <span className="text-white font-mono text-2xl font-black italic">{'>='}</span>
-    </div>
-    <div className="flex flex-col leading-none">
-      <span className={`text-2xl font-black tracking-tighter uppercase italic bg-gradient-to-b ${light ? 'from-white to-slate-400' : 'from-slate-800 to-black'} bg-clip-text text-transparent`}>
-        Melanu
-      </span>
-      <span className="text-[9px] font-bold text-blue-500 uppercase tracking-[0.3em] mt-1">
-        Technologies Pvt Ltd
-      </span>
-    </div>
-  </div>
-);
-
-const Badge = ({ children, variant = "blue" }) => {
-  const styles = {
-    blue: "bg-blue-600 text-white",
-    outline: "border border-slate-200 text-slate-500",
-    new: "bg-slate-900 text-white",
-    ev: "bg-green-600 text-white",
-    aero: "bg-indigo-700 text-white",
-    industrial: "bg-slate-600 text-white",
-    electronics: "bg-blue-400 text-white"
-  };
-  return <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest ${styles[variant] || styles.blue}`}>{children}</span>;
-};
-
-// --- SUB-VIEWS DEFINED OUTSIDE APP ---
-
-const Navbar = ({ view, setView, isScrolled, megaMenu, setMegaMenu }) => (
-  <div className="fixed top-0 w-full z-[1000]">
-    <div className="bg-slate-950 text-white py-2.5 px-10 border-b border-white/5 hidden md:flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-      <div className="flex gap-8">
-        <span className="flex items-center gap-2"><Phone size={12} className="text-blue-500"/> +91 7989269904</span>
-        <span className="flex items-center gap-2"><Mail size={12} className="text-blue-500"/> sales@melanu.in</span>
-      </div>
-      <div className="flex gap-6 items-center">
-        <span className="text-blue-500">Node Operations:</span>
-        <span>Karimnagar</span>
-        <span>Hyderabad</span>
-        <span>Pune</span>
-        <span>Vizag</span>
-      </div>
-    </div>
-
-    <nav 
-      className={`w-full transition-all duration-500 ${isScrolled ? 'bg-white shadow-2xl py-3' : 'bg-white/95 backdrop-blur-md py-6'}`}
-      onMouseLeave={() => setMegaMenu(null)}
-    >
-      <div className="max-w-[1600px] mx-auto px-10 flex justify-between items-center">
-        <div onClick={() => setView('home')}><Logo /></div>
-        
-        <div className="hidden lg:flex items-center gap-10">
-          <button 
-            onMouseEnter={() => setMegaMenu('products')}
-            onClick={() => setView('catalog')}
-            className={`text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all hover:text-blue-600 ${view === 'catalog' ? 'text-blue-600' : 'text-slate-700'}`}
-          >
-            Products <ChevronDown size={14} className={megaMenu === 'products' ? 'rotate-180 transition-transform' : 'transition-transform'}/>
-          </button>
-          {['Applications', 'Quality', 'About', 'Contact'].map((item) => (
-            <button 
-              key={item} 
-              onClick={() => setView(item.toLowerCase())}
-              className={`text-xs font-black uppercase tracking-widest transition-all hover:text-blue-600 ${view === item.toLowerCase() ? 'text-blue-600' : 'text-slate-700'}`}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-5">
-          <div className="relative hidden xl:block">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16}/>
-            <input placeholder="SEARCH PART OR BRAND..." className="pl-10 pr-4 py-2 bg-slate-100 border-none rounded text-[10px] font-bold uppercase w-48 focus:w-64 transition-all outline-none" />
-          </div>
-          <button onClick={() => setView('rfq')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-sm font-black text-[10px] uppercase tracking-widest transition-all shadow-xl">
-            Get Quote
-          </button>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {megaMenu === 'products' && (
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            className="absolute top-full left-0 w-full bg-white border-t shadow-2xl p-12"
-          >
-            <div className="max-w-[1600px] mx-auto grid grid-cols-5 gap-12">
-              {CATEGORIES.map((cat) => (
-                <div key={cat.id} className="space-y-6">
-                  <div className="flex items-center gap-3 text-blue-600 border-b pb-4">
-                    {cat.icon}
-                    <h4 className="font-black uppercase tracking-tighter text-lg">{cat.name}</h4>
-                  </div>
-                  <ul className="space-y-3">
-                    {cat.sub.map((s) => (
-                      <li 
-                        key={s.name} 
-                        onClick={() => { setView('catalog'); setMegaMenu(null); }}
-                        className="text-xs font-bold text-slate-500 hover:text-blue-600 cursor-pointer flex justify-between items-center group"
-                      >
-                        {s.name}
-                        <span className="text-[9px] opacity-0 group-hover:opacity-100 bg-slate-100 px-2 rounded">{s.count}</span>
-                      </li>
-                    ))}
-                  </ul>
+        // --- UI COMPONENTS ---
+        const Logo = ({ light = false }) => (
+            <div className="flex items-center gap-4 cursor-pointer">
+                <div className="relative w-10 h-10 bg-slate-900 rounded-lg border border-blue-500/50 flex items-center justify-center shadow-lg">
+                    <span className="text-white font-mono text-lg font-black italic">{'>='}</span>
                 </div>
-              ))}
+                <div className="flex flex-col leading-none">
+                    <span className={`text-xl font-black tracking-tighter uppercase italic ${light ? 'text-white' : 'text-slate-900'}`}>Melanu</span>
+                    <span className="text-[7px] font-bold text-blue-500 uppercase tracking-[0.3em]">Technologies Pvt Ltd</span>
+                </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
-  </div>
-);
+        );
 
-const HomeView = ({ setView }) => (
-  <div className="animate-in fade-in duration-1000">
-    <section className="relative h-[90vh] bg-[#02040a] overflow-hidden flex items-center">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,_rgba(59,130,246,0.18),_transparent_70%)]"></div>
-        <div className="absolute inset-0 opacity-[0.07]" style={{backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '80px 80px'}}></div>
-      </div>
-      <div className="max-w-[1600px] mx-auto px-10 relative z-10 w-full grid lg:grid-cols-2 gap-20 items-center">
-        <div className="space-y-12">
-          <motion.div 
-            initial={{ x: -50, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
-            className="inline-flex items-center gap-3 bg-blue-600/10 border border-blue-600/20 px-5 py-2 rounded-full"
-          >
-            <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse"></div>
-            <span className="text-[10px] font-black text-blue-400 uppercase tracking-[0.3em]">India's Enterprise Semiconductor Terminal</span>
-          </motion.div>
-          <h1 className="text-8xl lg:text-9xl font-black text-white leading-none tracking-tighter uppercase italic">
-            Engineered <br />
-            <span className="text-blue-500">Precision</span>
-          </h1>
-          <p className="text-xl text-slate-400 max-w-xl font-medium leading-relaxed border-l-4 border-blue-600 pl-8 italic">
-            Strategic distribution for EV, Aerospace, and Industrial clusters. Providing verified silicon solutions from wafer to application.
-          </p>
-          <div className="flex gap-8">
-            <button onClick={() => setView('catalog')} className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-sm font-black uppercase text-xs tracking-widest transition-all shadow-[0_0_30px_rgba(59,130,246,0.3)]">Explore Archive</button>
-            <button onClick={() => setView('rfq')} className="bg-transparent border-2 border-white/20 hover:border-blue-500 text-white px-12 py-5 rounded-sm font-black uppercase text-xs tracking-widest transition-all">Submit BOM</button>
-          </div>
-        </div>
-        <div className="hidden lg:flex justify-end relative">
-          <div className="bg-gradient-to-br from-slate-900 to-black rounded-[4rem] p-24 border border-white/10 relative shadow-2xl group overflow-hidden">
-             <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-blue-500/10 transition-colors"></div>
-             <ChipIcon size={350} className="text-blue-600/20 relative z-10" strokeWidth={0.5}/>
-             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center z-20">
-                <div className="text-[9px] font-black text-blue-400 uppercase tracking-[1em] mb-2">Architect: Melanu.V2</div>
-                <div className="text-white text-3xl font-black italic uppercase tracking-tighter">Silicon Core</div>
-             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        const App = () => {
+            const [view, setView] = useState('home');
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [isAIOpen, setIsAIOpen] = useState(false);
 
-    <section className="py-32 bg-white">
-      <div className="max-w-[1600px] mx-auto px-10">
-        <SectionHeader title="Priority Sectors" subtitle="Mission-critical components for India's high-growth industrial and mobility ecosystems." />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {APPLICATIONS.map((app) => (
-            <div key={app.name} className="group p-12 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:bg-slate-950 transition-all duration-700 shadow-sm hover:shadow-2xl">
-              <div className="text-blue-600 group-hover:text-blue-400 mb-10 transform group-hover:scale-110 transition-transform">
-                {app.icon}
-              </div>
-              <h3 className="text-3xl font-black text-slate-900 group-hover:text-white uppercase mb-6 tracking-tighter italic">{app.name}</h3>
-              <p className="text-sm text-slate-500 group-hover:text-slate-400 font-medium leading-relaxed">{app.desc}</p>
-              <div className="mt-10 flex items-center gap-3 text-blue-600 text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100">
-                Access Engineering Files <ArrowRight size={14}/>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  </div>
-);
+            useEffect(() => {
+                const handleScroll = () => setIsScrolled(window.scrollY > 40);
+                window.addEventListener('scroll', handleScroll);
+                lucide.createIcons();
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
 
-const CatalogView = ({ setView, handleProductClick }) => {
-  const [filter, setFilter] = useState('all');
-  const filteredProducts = useMemo(() => filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter), [filter]);
+            useEffect(() => { lucide.createIcons(); }, [view, isAIOpen]);
 
-  return (
-    <div className="pt-48 pb-32 bg-slate-50 min-h-screen">
-      <div className="max-w-[1600px] mx-auto px-10 grid lg:grid-cols-[350px_1fr] gap-16">
-        <aside className="space-y-12">
-          <div className="bg-white p-10 rounded-3xl shadow-xl border border-slate-100">
-            <h3 className="font-black uppercase tracking-[0.2em] text-[10px] mb-10 flex items-center gap-3 text-blue-600">
-              <Filter size={14}/> Engineering Filter
-            </h3>
-            <div className="space-y-4">
-              <button onClick={() => setFilter('all')} className={`w-full text-left px-6 py-3 text-xs font-black uppercase rounded-lg transition-all ${filter === 'all' ? 'bg-blue-600 text-white' : 'hover:bg-slate-100 text-slate-500'}`}>All Products</button>
-              {CATEGORIES.map((cat) => (
-                <button key={cat.id} onClick={() => setFilter(cat.id)} className={`w-full text-left px-6 py-3 text-xs font-black uppercase rounded-lg transition-all ${filter === cat.id ? 'bg-blue-600 text-white' : 'hover:bg-slate-100 text-slate-500'}`}>{cat.name}</button>
-              ))}
-            </div>
-          </div>
-          <div className="bg-slate-900 p-10 rounded-3xl text-white shadow-2xl relative overflow-hidden">
-            <Sparkles className="text-blue-400 mb-6" size={32}/>
-            <h4 className="font-black uppercase italic text-xl mb-4 tracking-tighter">AI Parametric Search</h4>
-            <p className="text-[11px] text-slate-400 font-medium leading-relaxed mb-10 uppercase tracking-widest">Submit system specs to find the optimal Melanu component.</p>
-            <button onClick={() => setView('aitools')} className="w-full bg-blue-600 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-colors">Invoke AI Assistant</button>
-          </div>
-        </aside>
+            return (
+                <div className="min-h-screen">
+                    {/* Navigation */}
+                    <nav className={`fixed top-0 w-full z-[1000] transition-all duration-300 ${isScrolled ? 'bg-white shadow-xl py-3' : 'bg-white/95 py-6'}`}>
+                        <div className="max-w-[1400px] mx-auto px-6 flex justify-between items-center">
+                            <div onClick={() => setView('home')}><Logo /></div>
+                            <div className="hidden md:flex gap-8 items-center text-xs font-bold uppercase tracking-widest text-slate-600">
+                                <button onClick={() => setView('catalog')} className="hover:text-blue-600">Products</button>
+                                <button onClick={() => setView('home')} className="hover:text-blue-600">Applications</button>
+                                <button onClick={() => setView('home')} className="hover:text-blue-600">About</button>
+                                <button onClick={() => setView('home')} className="hover:text-blue-600">Contact</button>
+                                <button onClick={() => setView('rfq')} className="bg-blue-600 text-white px-6 py-2 rounded shadow-lg">RFQ</button>
+                            </div>
+                        </div>
+                    </nav>
 
-        <main className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden">
-          <div className="p-10 border-b border-slate-50 flex justify-between items-center">
-            <h2 className="text-3xl font-black uppercase tracking-tighter italic">Component Archive</h2>
-            <div className="flex gap-4">
-              <button className="p-3 border rounded-xl hover:bg-slate-50"><Download size={20}/></button>
-              <button className="p-3 border rounded-xl hover:bg-slate-50"><Printer size={20}/></button>
-            </div>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead className="bg-slate-50/50">
-                <tr className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                  <th className="px-10 py-8">Part Identifier</th>
-                  <th className="px-10 py-8">Sector</th>
-                  <th className="px-10 py-8">Package / Form</th>
-                  <th className="px-10 py-8">Primary Specs</th>
-                  <th className="px-10 py-8">Status</th>
-                  <th className="px-10 py-8 text-right">Access</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-50">
-                {filteredProducts.map((p) => (
-                  <tr key={p.id} className="hover:bg-blue-50/20 transition-all cursor-pointer group" onClick={() => handleProductClick(p)}>
-                    <td className="px-10 py-8 font-black text-blue-600 text-sm tracking-tighter">{p.id}</td>
-                    <td className="px-10 py-8"><Badge variant={p.sector.toLowerCase()}>{p.sector}</Badge></td>
-                    <td className="px-10 py-8 text-xs font-bold text-slate-500">{p.specs.pkg}</td>
-                    <td className="px-10 py-8 text-[11px] font-mono font-bold text-slate-900">{p.specs.vds} | {p.specs.id}</td>
-                    <td className="px-10 py-8"><span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded ${p.status === 'New' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'}`}>{p.status}</span></td>
-                    <td className="px-10 py-8 text-right"><ChevronRight className="inline-block text-slate-300 group-hover:text-blue-600 transition-colors" size={24}/></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </main>
-      </div>
-    </div>
-  );
-};
+                    <main className="pt-24">
+                        {view === 'home' && (
+                            <section className="relative h-[85vh] bg-[#02040a] flex items-center overflow-hidden">
+                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,_rgba(59,130,246,0.2),_transparent_70%)]"></div>
+                                <div className="max-w-[1400px] mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-10">
+                                    <div className="text-white space-y-8">
+                                        <h1 className="text-7xl lg:text-9xl font-black italic leading-none tracking-tighter uppercase">
+                                            Strategic <br/><span className="text-blue-500">Silicon</span>
+                                        </h1>
+                                        <p className="text-slate-400 max-w-md border-l-4 border-blue-600 pl-6 italic">
+                                            High-reliability semiconductor distribution for EV, Aerospace, and Industrial clusters in India.
+                                        </p>
+                                        <div className="flex gap-4">
+                                            <button onClick={() => setView('catalog')} className="bg-blue-600 px-10 py-4 font-bold uppercase text-xs">Explore Archive</button>
+                                            <button className="border border-white/20 px-10 py-4 font-bold uppercase text-xs">Download Catalog</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        )}
 
-const ProductDetailView = ({ selectedProduct, setView }) => (
-  <div className="pt-48 pb-32 bg-white">
-    <div className="max-w-[1200px] mx-auto px-10">
-      <div className="grid lg:grid-cols-2 gap-24 items-center">
-        <div className="bg-slate-50 rounded-[4rem] p-32 flex items-center justify-center border border-slate-100 shadow-inner relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-10 opacity-20"><ChipIcon size={120}/></div>
-          <ChipIcon size={300} className="text-blue-600/10 relative z-10" strokeWidth={0.5}/>
-        </div>
-        <div className="space-y-12">
-          <div>
-            <div className="flex gap-4 mb-6">
-              <Badge variant={selectedProduct?.sector.toLowerCase()}>{selectedProduct?.sector}</Badge>
-              <Badge variant="outline">{selectedProduct?.status}</Badge>
-            </div>
-            <h1 className="text-7xl font-black uppercase tracking-tighter italic leading-none">{selectedProduct?.id}</h1>
-            <p className="text-2xl font-bold text-slate-400 mt-4 italic">{selectedProduct?.name}</p>
-          </div>
-          
-          <div className="grid grid-cols-2 gap-8 border-y border-slate-100 py-12">
-            <div>
-              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Sub-Family</div>
-              <div className="text-lg font-black text-slate-900 italic">{selectedProduct?.sub}</div>
-            </div>
-            <div>
-              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Package Arch.</div>
-              <div className="text-lg font-black text-slate-900 italic">{selectedProduct?.specs.pkg}</div>
-            </div>
-            <div>
-              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Critical Rating</div>
-              <div className="text-lg font-black text-slate-900 italic">{selectedProduct?.specs.vds}</div>
-            </div>
-            <div>
-              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Max Operations</div>
-              <div className="text-lg font-black text-slate-900 italic">{selectedProduct?.specs.id}</div>
-            </div>
-          </div>
+                        {view === 'catalog' && (
+                            <section className="py-20 px-6 max-w-[1400px] mx-auto">
+                                <h2 className="text-4xl font-black italic uppercase mb-10">Component Archive</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {PRODUCTS.map(p => (
+                                        <div key={p.id} className="border p-8 rounded-2xl hover:border-blue-500 transition-all shadow-sm">
+                                            <span className="text-blue-500 text-[10px] font-black uppercase tracking-widest">{p.sector}</span>
+                                            <h3 className="text-xl font-black mt-2">{p.id}</h3>
+                                            <p className="text-slate-500 text-sm mb-4">{p.name}</p>
+                                            <div className="text-xs font-mono text-slate-800 bg-slate-50 p-3 rounded">{p.specs}</div>
+                                            <button className="w-full mt-6 bg-slate-900 text-white py-3 text-[10px] font-black uppercase">Technical Specs</button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+                    </main>
 
-          <div className="flex gap-6">
-            <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-sm font-black uppercase tracking-widest text-xs flex items-center justify-center gap-4 transition-all shadow-xl">
-              <Download size={18}/> Technical Datasheet
-            </button>
-            <button onClick={() => setView('rfq')} className="flex-1 bg-slate-900 hover:bg-black text-white py-5 rounded-sm font-black uppercase tracking-widest text-xs transition-all">
-              Request Pricing Node
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+                    {/* Footer */}
+                    <footer className="bg-slate-950 text-white py-20 mt-20">
+                        <div className="max-w-[1400px] mx-auto px-6 grid md:grid-cols-4 gap-10">
+                            <div className="col-span-2">
+                                <Logo light />
+                                <p className="mt-6 text-slate-500 text-sm max-w-sm">Strategic integrated platform for high-performance discrete components.</p>
+                            </div>
+                            <div>
+                                <h4 className="text-blue-500 font-black uppercase text-[10px] mb-6 tracking-widest">Contact Node</h4>
+                                <ul className="text-slate-400 text-xs space-y-4 font-bold uppercase">
+                                    <li>+91 7989269904</li>
+                                    <li>sales@melanu.in</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
 
-const AIToolsView = ({ setView }) => {
-  const [query, setQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState('');
-
-  const handleSearch = async () => {
-    if (!query.trim()) return;
-    setLoading(true);
-    setResult('');
-    const prompt = `User needs a semiconductor for ${query}. Provide Melanu equivalents for EV/Aerospace based on industry benchmarks. List part numbers and explain suitability.`;
-    const res = await callGeminiAPI(prompt, "You are the Melanu Lead Full-Stack Semiconductor Architect. Provide high-fidelity B2B engineering responses.");
-    setResult(res);
-    setLoading(false);
-  };
-
-  return (
-    <div className="pt-48 pb-32 bg-slate-50 min-h-screen">
-      <div className="max-w-4xl mx-auto px-10">
-        <SectionHeader title="✨ Neural Asset Search" subtitle="State-of-the-art AI interface to query our global component archives for specific project requirements." />
-        <div className="bg-white p-12 rounded-[3rem] shadow-2xl border border-slate-100 space-y-10">
-          <textarea className="w-full border-2 border-slate-50 bg-slate-50/30 rounded-[2rem] p-10 text-lg font-medium outline-none focus:border-blue-600 focus:bg-white transition-all italic" rows="4" placeholder="Request description... e.g. I need a SiC MOSFET for a 400V EV charger with sub-25ms switching." value={query} onChange={e => setQuery(e.target.value)} />
-          <button onClick={handleSearch} disabled={loading} className="w-full bg-slate-900 text-white py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs flex items-center justify-center gap-6 hover:bg-blue-600 transition-all disabled:opacity-50">
-            {loading ? <Loader2 className="animate-spin" size={20}/> : <Terminal size={20}/>}
-            {loading ? "ACCESSING NEURAL CORE..." : "EXECUTE PARAMETRIC QUERY"}
-          </button>
-        </div>
-        <AnimatePresence>
-          {result && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-16 bg-white p-16 rounded-[4rem] border-l-[12px] border-blue-600 shadow-2xl relative overflow-hidden">
-               <div className="absolute top-0 right-0 p-10 opacity-5"><Activity size={120}/></div>
-               <div className="text-[10px] font-black text-blue-600 uppercase tracking-[0.5em] mb-10">Neural Response Hash: MLN-AI-V2</div>
-               <div className="font-mono text-sm leading-[1.8] text-slate-600 whitespace-pre-wrap">{result}</div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-};
-
-const AIAssistant = ({ isOpen, setIsOpen }) => {
-  const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([{ role: 'ai', text: 'Melanu Neural Assistant active. Ready for engineering support.' }]);
-  const [loading, setLoading] = useState(false);
-  const scrollRef = useRef(null);
-
-  useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight; }, [messages]);
-
-  const handleSend = async () => {
-    if (!input.trim() || loading) return;
-    setMessages(prev => [...prev, { role: 'user', text: input }]);
-    setInput('');
-    setLoading(true);
-    try {
-      const response = await callGeminiAPI(input, "Professional Melanu Semi AI Assistant. Concise technical support.");
-      setMessages(prev => [...prev, { role: 'ai', text: response }]);
-    } catch (e) { setMessages(prev => [...prev, { role: 'ai', text: "Node offline." }]); }
-    finally { setLoading(false); }
-  };
-
-  return (
-    <div className="fixed bottom-12 right-12 z-[2000]">
-      {isOpen ? (
-        <div className="bg-white border-2 border-slate-100 w-[420px] h-[600px] flex flex-col rounded-[2.5rem] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden">
-          <div className="p-8 bg-slate-950 text-white flex justify-between items-center">
-            <span className="font-black text-xs uppercase tracking-widest flex items-center gap-4"><Bot className="text-blue-500" size={24}/> Technical Node</span>
-            <button onClick={() => setIsOpen(false)} className="hover:text-blue-400 transition-colors"><X size={24}/></button>
-          </div>
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-10 space-y-8 text-xs font-bold text-slate-500 italic">
-            {messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] p-6 rounded-[1.5rem] leading-relaxed ${m.role === 'user' ? 'bg-blue-600 text-white' : 'bg-slate-50 text-slate-800 border'}`}>{m.text}</div>
-              </div>
-            ))}
-            {loading && <div className="flex justify-start"><Loader2 className="animate-spin text-blue-600" size={20}/></div>}
-          </div>
-          <div className="p-8 border-t border-slate-50 flex gap-4 bg-slate-50/50">
-            <input className="flex-1 bg-white border border-slate-200 rounded-xl px-6 py-4 text-xs font-bold italic outline-none focus:border-blue-600 transition-all" placeholder="Input technical command..." value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSend()}/>
-            <button onClick={handleSend} className="bg-blue-600 text-white p-4 rounded-xl shadow-lg hover:bg-blue-700 transition-all"><Send size={24}/></button>
-          </div>
-        </div>
-      ) : (
-        <button onClick={() => setIsOpen(true)} className="bg-slate-950 text-white p-6 rounded-[2rem] shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:scale-110 transition-transform flex items-center gap-4 group">
-          <Sparkles className="text-blue-500" size={28}/>
-          <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-700 font-black uppercase text-xs tracking-widest whitespace-nowrap">Invoke Melanu.AI</span>
-        </button>
-      )}
-    </div>
-  );
-};
-
-// --- MAIN APPLICATION COMPONENT ---
-
-const App = () => {
-  const [view, setView] = useState('home');
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [megaMenu, setMegaMenu] = useState(null);
-  const [isAIOpen, setIsAIOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleProductClick = (prod) => {
-    setSelectedProduct(prod);
-    setView('product_detail');
-    window.scrollTo(0, 0);
-  };
-
-  return (
-    <div className="min-h-screen font-sans selection:bg-blue-600 selection:text-white bg-white overflow-x-hidden">
-      <Navbar 
-        view={view} 
-        setView={setView} 
-        isScrolled={isScrolled} 
-        megaMenu={megaMenu} 
-        setMegaMenu={setMegaMenu} 
-      />
-      
-      <main>
-        {view === 'home' && <HomeView setView={setView} />}
-        {view === 'catalog' && <CatalogView setView={setView} handleProductClick={handleProductClick} />}
-        {view === 'product_detail' && <ProductDetailView selectedProduct={selectedProduct} setView={setView} />}
-        {view === 'aitools' && <AIToolsView setView={setView} />}
-        {['about', 'contact', 'quality', 'rfq', 'applications'].includes(view) && (
-          <div className="pt-60 pb-40 text-center">
-            <h1 className="text-8xl font-black uppercase italic tracking-tighter text-slate-100">{view}_terminal</h1>
-            <div className="mt-8 flex items-center justify-center gap-5 text-blue-500 font-black uppercase text-xs tracking-[1em]">
-              <Loader2 className="animate-spin" size={20}/> Synchronizing Node_01
-            </div>
-          </div>
-        )}
-      </main>
-
-      <AIAssistant isOpen={isAIOpen} setIsOpen={setIsAIOpen} />
-
-      <footer className="bg-slate-950 text-white pt-48 pb-20 border-t border-white/5 relative overflow-hidden">
-        <div className="absolute bottom-0 right-0 p-40 opacity-5"><Logo light /></div>
-        <div className="max-w-[1600px] mx-auto px-10 relative z-10">
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-32 mb-32">
-            <div className="lg:col-span-2 space-y-12">
-              <Logo light />
-              <p className="text-slate-400 text-sm max-w-md leading-relaxed font-bold italic uppercase tracking-widest">
-                India's Strategic B2B Integrated Platform. Sourcing high-reliability discrete components for EV, Aerospace, and Industrial clusters.
-              </p>
-              <div className="flex gap-8">
-                {[1, 2, 3].map(i => <div key={i} className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all cursor-pointer"><Share2 size={24}/></div>)}
-              </div>
-            </div>
-            {['Archives', 'Nodes', 'Legal'].map((g) => (
-              <div key={g}>
-                <h4 className="text-[11px] font-black text-blue-500 uppercase tracking-[0.6em] mb-12 italic">{g}</h4>
-                <ul className="space-y-8 text-[11px] font-black text-slate-500 uppercase tracking-widest">
-                  <li className="hover:text-white cursor-pointer transition-colors italic">Silicon Archive</li>
-                  <li className="hover:text-white cursor-pointer transition-colors italic">BOM Transmission</li>
-                  <li className="hover:text-white cursor-pointer transition-colors italic">Quality Compliance</li>
-                </ul>
-              </div>
-            ))}
-          </div>
-          <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-12 text-[10px] font-black text-slate-700 tracking-[1em] uppercase italic">
-            <p>© 2026 Melanu Technologies Pvt Ltd. Connection Secured.</p>
-            <div className="flex gap-16">
-              <span>Privacy_Protocol</span>
-              <span>v2.4.0-Enterprise</span>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-export default App;
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
