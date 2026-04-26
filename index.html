@@ -5,144 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melanu Technologies Pvt Ltd | >= Engineering Tomorrow</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     
     <style>
-        :root {
-            --neon: #00f3ff;
-            --silver: #c0c0c0;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #050505;
-            color: #c0c0c0;
-            overflow-x: hidden;
-        }
-        .logo-font {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .neon-text {
-            text-shadow: 0 0 10px var(--neon),
-                        0 0 20px var(--neon),
-                        0 0 40px var(--neon);
-        }
-        .glass {
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 243, 255, 0.15);
-        }
-        .metallic {
-            background: linear-gradient(145deg, #c0c0c0, #a0a0a0, #e0e0e0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero-bg {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-        }
+        body { font-family: 'Inter', sans-serif; background: #050505; color: #c0c0c0; }
+        .logo-font { font-family: 'Space Grotesk', sans-serif; }
+        .neon-text { text-shadow: 0 0 15px #00f3ff, 0 0 30px #00f3ff; }
+        .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); border: 1px solid rgba(0,243,255,0.2); }
+        .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
+        .metallic { background: linear-gradient(145deg, #e0e0e0, #a8a8a8, #f0f0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="min-h-screen">
+
     <!-- NAVBAR -->
-    <nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+    <nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/90 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <img src="https://i.imgur.com/YOUR-LOGO-LINK.png" alt="Melanu Logo" class="h-12 w-auto" id="logo-img">
-                <!-- Replace above with your actual logo URL or base64 if needed -->
+                <img src="https://i.ibb.co/your-logo.png" alt="Melanu Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/180x60/111827/00f3ff?text=MELANU'">
                 <div>
                     <span class="logo-font text-4xl font-bold tracking-tighter metallic">MELANU</span>
-                    <p class="text-[10px] text-[#00f3ff] tracking-[2px] -mt-1">TECHNOLOGIES PVT LTD</p>
+                    <p class="text-xs text-[#00f3ff] tracking-[3px] -mt-1">TECHNOLOGIES PVT LTD</p>
                 </div>
             </div>
-
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#home" class="hover:text-[#00f3ff] transition-colors">Home</a>
-                <a href="#about" class="hover:text-[#00f3ff] transition-colors">About</a>
-                <a href="#services" class="hover:text-[#00f3ff] transition-colors">Services</a>
-                <a href="#products" class="hover:text-[#00f3ff] transition-colors">Products</a>
-                <a href="#contact" class="hover:text-[#00f3ff] transition-colors">Contact</a>
+            <div class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#home" class="hover:text-[#00f3ff]">Home</a>
+                <a href="#services" class="hover:text-[#00f3ff]">Services</a>
+                <a href="#products" class="hover:text-[#00f3ff]">Products</a>
+                <a href="#contact" class="hover:text-[#00f3ff]">Contact</a>
             </div>
-
-            <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
-                class="bg-[#00f3ff] hover:bg-cyan-300 text-black px-6 py-3 rounded-xl font-semibold text-sm transition-all">
-                Get In Touch
-            </button>
+            <a href="#contact" class="bg-[#00f3ff] text-black px-6 py-3 rounded-2xl font-semibold">Get In Touch</a>
         </div>
     </nav>
 
     <!-- HERO -->
     <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-8">
-                <div class="inline-flex items-center gap-2 bg-white/5 border border-[#00f3ff]/30 px-4 py-2 rounded-full">
-                    <span class="w-2 h-2 bg-[#00f3ff] rounded-full animate-pulse"></span>
-                    <span class="text-xs uppercase tracking-widest font-mono text-[#00f3ff]">Deep Tech Innovation</span>
-                </div>
-                
-                <h1 class="text-6xl lg:text-7xl font-bold tracking-tighter leading-none">
-                    &gt;= <span class="text-white">ENGINEERING</span><br>
-                    TOMORROW'S<br>
-                    <span class="text-[#00f3ff] neon-text">INTELLIGENCE</span>
-                </h1>
-                
-                <p class="text-xl text-gray-400 max-w-lg">
-                    Futuristic Cloud, AI, Quantum-inspired solutions and Enterprise Technology Services.
-                </p>
-                
-                <div class="flex gap-4">
-                    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
-                        class="bg-[#00f3ff] text-black px-8 py-4 rounded-2xl font-semibold hover:scale-105 transition">
-                        Start a Project
-                    </button>
-                    <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"
-                        class="border border-[#00f3ff]/50 hover:border-[#00f3ff] px-8 py-4 rounded-2xl font-semibold transition">
-                        Explore Innovations
-                    </button>
-                </div>
-            </div>
-            
-            <div class="relative">
-                <img src="https://i.imgur.com/YOUR-LOGO-LINK.png" alt="Melanu Logo" class="w-full max-w-lg mx-auto drop-shadow-2xl" id="hero-logo">
-            </div>
+        <div class="max-w-7xl mx-auto px-6 text-center lg:text-left">
+            <h1 class="text-6xl lg:text-7xl font-bold tracking-tighter leading-none">
+                &gt;= <span class="text-white">ENGINEERING</span><br>
+                TOMORROW'S<br>
+                <span class="text-[#00f3ff] neon-text">INTELLIGENCE</span>
+            </h1>
+            <p class="text-xl mt-6 text-gray-400 max-w-2xl mx-auto lg:mx-0">AI • Cloud • DevOps • Cybersecurity • Quantum-inspired Solutions</p>
         </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services" class="py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-5xl font-bold text-center mb-16 neon-text">Our Expertise</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Add 6 service cards here - I can expand if you want -->
-                <div class="glass p-8 rounded-3xl group hover:scale-105 transition-all">
-                    <div class="text-[#00f3ff] mb-6"><i data-lucide="cloud" class="w-12 h-12"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3">Cloud Solutions</h3>
-                    <p class="text-gray-400">Enterprise-grade cloud infrastructure and migration.</p>
-                </div>
-                <!-- Repeat similar cards for AI, DevOps, Cybersecurity, etc. -->
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT WITH SUPABASE -->
-    <section id="contact" class="py-24 bg-black/95">
+    <!-- CONTACT FORM with Supabase -->
+    <section id="contact" class="py-24">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-5xl font-bold text-center mb-16 neon-text">Let's Build the Future</h2>
+            <h2 class="text-5xl font-bold text-center mb-12 neon-text">Get In Touch</h2>
             
             <form id="contactForm" class="glass p-10 rounded-3xl space-y-6">
                 <div class="grid md:grid-cols-2 gap-6">
-                    <input type="text" id="name" placeholder="Full Name" required
-                        class="bg-black/50 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
-                    <input type="email" id="email" placeholder="Business Email" required
-                        class="bg-black/50 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
+                    <input type="text" id="name" placeholder="Your Name" required class="bg-black/70 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
+                    <input type="email" id="email" placeholder="Email Address" required class="bg-black/70 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
                 </div>
-                <input type="text" id="subject" placeholder="Subject" 
-                    class="w-full bg-black/50 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
-                <textarea id="message" rows="6" placeholder="Tell us about your project..." required
-                    class="w-full bg-black/50 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none"></textarea>
+                <input type="text" id="subject" placeholder="Subject" class="w-full bg-black/70 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none">
+                <textarea id="message" rows="6" placeholder="Tell us about your project..." required class="w-full bg-black/70 border border-white/20 rounded-2xl px-6 py-4 focus:border-[#00f3ff] outline-none"></textarea>
                 
-                <button type="submit"
-                    class="w-full bg-[#00f3ff] hover:bg-cyan-300 text-black font-bold py-5 rounded-2xl text-lg transition-all">
+                <button type="submit" class="w-full bg-[#00f3ff] hover:bg-cyan-300 text-black font-bold py-5 rounded-2xl text-lg transition-all">
                     SEND MESSAGE
                 </button>
             </form>
@@ -150,10 +73,9 @@
     </section>
 
     <script>
-        // Supabase Configuration
         const supabase = Supabase.createClient(
-            'https://jafigtmdqbaksizmjoyd.supabase.co/rest/v1/',           // ← Replace
-            'sb_publishable_1AZMRvkgLqjWefuDK2k6Yg_jTKpJgU4'       // ← Replace with publishable key
+            'https://YOUR-PROJECT.supabase.co',           // ← CHANGE THIS
+            'sb_publishable_1AZMRvkgLqjWefuDK2k6Yg_jTKpJ...' // ← CHANGE THIS
         );
 
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
@@ -162,27 +84,22 @@
             btn.textContent = 'Sending...';
             btn.disabled = true;
 
-            const formData = {
+            const { error } = await supabase.from('contacts').insert([{
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
+                subject: document.getElementById('subject').value || 'Website Inquiry',
                 message: document.getElementById('message').value
-            };
+            }]);
 
-            const { error } = await supabase.from('contacts').insert([formData]);
-            
-            if (error) {
-                alert('Error: ' + error.message);
-            } else {
-                alert('✅ Thank you! Your message has been received.');
+            if (error) alert('Error: ' + error.message);
+            else {
+                alert('✅ Message received! Thank you.');
                 e.target.reset();
             }
-            
             btn.textContent = 'SEND MESSAGE';
             btn.disabled = false;
         });
 
-        // Initialize Lucide icons
         lucide.createIcons();
     </script>
 </body>
