@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Melanu Technologies</title>
+  <meta name="description" content="Get in touch with Melanu Technologies for component enquiries, quotes, and partnerships.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Melanu Technologies">
+        <div class="logo-text">MELANU<span>TECHNOLOGIES PVT LTD</span></div>
+      </a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="nav-cta">Get Quote</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
+      <h1>Get in Touch</h1>
+      <p>We respond to all enquiries within 24 hours</p>
+    </div>
+  </header>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Contact Info Card -->
+        <div class="contact-info-card">
+          <h3>Contact Information</h3>
+          <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem;">Reach out via any channel — we're here to help.</p>
+
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <div class="contact-item-label">Sales Enquiries</div>
+              <a href="mailto:sales@melanu.in">sales@melanu.in</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🛒</div>
+            <div>
+              <div class="contact-item-label">Purchase / Sourcing</div>
+              <a href="mailto:purchase@melanu.in">purchase@melanu.in</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">ℹ️</div>
+            <div>
+              <div class="contact-item-label">General Information</div>
+              <a href="mailto:info@melanu.in">info@melanu.in</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <a href="tel:+917989269904">+91 79892 69904</a>
+              <a href="tel:+919910550878">+91 99105 50878</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div>
+              <div class="contact-item-label">WhatsApp</div>
+              <a href="https://wa.me/917989269904?text=Hello%20Melanu%20Technologies" target="_blank">+91 79892 69904</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">⏰</div>
+            <div>
+              <div class="contact-item-label">Working Hours</div>
+              <span class="contact-item-value">Mon – Sat: 9:30 AM – 7:00 PM IST</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enquiry Form -->
+        <div class="form-card">
+          <h2 style="margin-bottom: 0.5rem;">Send us an enquiry</h2>
+          <p style="color: var(--ink-500); margin-bottom: 2rem;">Fill out the form — we'll save it and redirect you to WhatsApp for instant connect.</p>
+
+          <form id="enquiryForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone / WhatsApp *</label>
+                <input type="tel" id="phone" name="phone" required>
+              </div>
+              <div class="form-group">
+                <label for="company">Company Name</label>
+                <input type="text" id="company" name="company">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="sector">Sector of Interest</label>
+              <select id="sector" name="sector">
+                <option value="">Select a sector</option>
+                <option value="Semiconductors">Semiconductors</option>
+                <option value="EV Components">EV Components</option>
+                <option value="Aerospace">Aerospace & Defense</option>
+                <option value="Robotics">Robotics & Automation</option>
+                <option value="Other">Other / Multiple</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Your Enquiry *</label>
+              <textarea id="message" name="message" placeholder="Share part numbers, quantities, application details..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Enquiry →</button>
+            <div id="formMsg" class="form-msg"></div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="floating-contacts">
+    <a href="https://wa.me/917989269904?text=Hello%20Melanu%20Technologies,%20I%20have%20an%20enquiry." target="_blank" class="float-btn float-whatsapp" title="WhatsApp">💬</a>
+    <a href="tel:+917989269904" class="float-btn float-call" title="Call us">📞</a>
+    <button id="botBtn" class="float-btn float-bot" title="AI Assistant">🤖</button>
+  </div>
+
+  <div id="chatbot" class="chatbot">
+    <div class="chatbot-head">
+      <div><h4>Melanu Assistant</h4><small>● Online</small></div>
+      <button id="chatbotClose" class="chatbot-close">✕</button>
+    </div>
+    <div class="chatbot-body">
+      <div class="chat-msg bot"><div class="bubble">👋 Need help? I can guide you to the right channel.</div></div>
+    </div>
+    <div class="chat-quick">
+      <button data-action="products">Products</button>
+      <button data-action="quote">Quote</button>
+      <button data-action="whatsapp">WhatsApp</button>
+      <button data-action="contact">Contact</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="logo.png" alt="Melanu" style="height: 40px;">
+            <div class="logo-text" style="color: var(--white);">MELANU<span style="color: var(--green-400);">TECHNOLOGIES</span></div>
+          </div>
+          <p>Global sourcing partner for semiconductor, EV, aerospace, and robotics components.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:sales@melanu.in">sales@melanu.in</a></li>
+            <li><a href="mailto:purchase@melanu.in">purchase@melanu.in</a></li>
+            <li><a href="mailto:info@melanu.in">info@melanu.in</a></li>
+            <li><a href="tel:+917989269904">+91 79892 69904</a></li>
+            <li><a href="tel:+919910550878">+91 99105 50878</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Sectors</h4>
+          <ul>
+            <li>Semiconductors</li>
+            <li>EV Components</li>
+            <li>Aerospace</li>
+            <li>Robotics</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Melanu Technologies Pvt Ltd. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
