@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Melanu Technologies — Global Supplier of Semiconductors, EV, Aerospace & Robotics Components</title>
-  <meta name="description" content="Melanu Technologies Pvt Ltd — Strategic global trading and supply partner for semiconductors, EV, aerospace, and robotics components.">
+  <title>Melanu Technologies — Global Supplier of Semiconductors, EV, Aerospace, Automobile & Robotics Components</title>
+  <meta name="description" content="Melanu Technologies Pvt Ltd — Strategic global trading and supply partner for semiconductors, EV, aerospace, automobile, and robotics components.">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
@@ -16,12 +17,10 @@
   <nav class="navbar">
     <div class="nav-inner">
       <a href="index.html" class="logo">
-        <img src="logo.svg" alt="Melanu" class="logo-symbol">
+        <img src="logo.svg" alt="Melanu">
         <div class="logo-text">MELANU<span>TECHNOLOGIES PVT LTD</span></div>
       </a>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="products.html">Products</a></li>
@@ -31,61 +30,106 @@
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero with animated visual -->
   <section class="hero">
     <div class="container">
       <div class="hero-grid">
         <div class="fade-up">
           <span class="hero-eyebrow">🌐 GLOBAL SOURCING PARTNER</span>
-          <h1>Powering <span class="accent">Semiconductors</span>, EV, Aerospace & Robotics worldwide</h1>
-          <p class="hero-lead">Melanu Technologies is a strategic global trader and supplier of mission-critical electronic components — from MOSFETs and BMS systems to MIL-spec connectors and high-torque servos.</p>
+          <h1>Powering <span class="accent">Semiconductors</span>, EV, Aerospace, Auto & Robotics worldwide</h1>
+          <p class="hero-lead">Melanu Technologies is a strategic global trader and supplier of mission-critical electronic components — from MOSFETs and BMS systems to MIL-spec connectors, ECUs, and high-torque servos.</p>
           <div class="hero-ctas">
             <a href="contact.html" class="btn btn-primary">Request a Quote →</a>
             <a href="products.html" class="btn btn-outline">Explore Products</a>
           </div>
           <div class="hero-stats">
-            <div>
-              <span class="stat-num">500+</span>
-              <div class="stat-label">Component Lines</div>
-            </div>
-            <div>
-              <span class="stat-num">25+</span>
-              <div class="stat-label">Countries Served</div>
-            </div>
-            <div>
-              <span class="stat-num">4</span>
-              <div class="stat-label">Core Sectors</div>
-            </div>
+            <div><span class="stat-num">500+</span><div class="stat-label">Component Lines</div></div>
+            <div><span class="stat-num">25+</span><div class="stat-label">Countries Served</div></div>
+            <div><span class="stat-num">5</span><div class="stat-label">Core Sectors</div></div>
           </div>
         </div>
+
+        <!-- Animated Hero Visual -->
         <div class="hero-visual fade-up">
-          <div class="hero-card">
-            <h3>Our Specializations</h3>
-            <div class="hero-card-grid">
-              <div class="hero-mini">
-                <div class="hero-mini-icon">⚡</div>
-                <div class="hero-mini-label">Semiconductors</div>
-              </div>
-              <div class="hero-mini">
-                <div class="hero-mini-icon">🚗</div>
-                <div class="hero-mini-label">EV Components</div>
-              </div>
-              <div class="hero-mini">
-                <div class="hero-mini-icon">✈️</div>
-                <div class="hero-mini-label">Aerospace</div>
-              </div>
-              <div class="hero-mini">
-                <div class="hero-mini-icon">🤖</div>
-                <div class="hero-mini-label">Robotics</div>
-              </div>
-            </div>
+          <svg class="circuit-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+            <!-- Circuit traces -->
+            <path class="circuit-line" d="M 50 100 L 150 100 L 150 200 L 250 200" />
+            <path class="circuit-line" d="M 350 80 L 280 80 L 280 160 L 200 160" />
+            <path class="circuit-line" d="M 60 320 L 160 320 L 160 260 L 220 260" />
+            <path class="circuit-line" d="M 340 300 L 260 300 L 260 240 L 320 240" />
+            <path class="circuit-line" d="M 100 50 L 100 130" />
+            <path class="circuit-line" d="M 300 350 L 300 280" />
+            <!-- Chip rectangles -->
+            <rect class="chip-rect" x="160" y="170" width="80" height="60" rx="6"/>
+            <text class="chip-label" x="200" y="205">MELANU</text>
+            <text class="chip-label" x="200" y="218" style="font-size: 6px;">CHIP</text>
+            <rect class="chip-rect" x="260" y="220" width="60" height="40" rx="4"/>
+            <text class="chip-label" x="290" y="245">EV-BMS</text>
+            <!-- Glowing nodes -->
+            <circle class="circuit-node" cx="50" cy="100" r="4"/>
+            <circle class="circuit-node delay-1" cx="350" cy="80" r="4"/>
+            <circle class="circuit-node delay-2" cx="60" cy="320" r="4"/>
+            <circle class="circuit-node delay-3" cx="340" cy="300" r="4"/>
+            <circle class="circuit-node" cx="150" cy="100" r="3"/>
+            <circle class="circuit-node delay-2" cx="280" cy="160" r="3"/>
+          </svg>
+          <div class="float-icons-overlay">
+            <div class="float-icon f1"><div class="ico">⚡</div>SEMI</div>
+            <div></div>
+            <div class="float-icon f2"><div class="ico">🚗</div>EV</div>
+            <div class="float-icon f3"><div class="ico">✈️</div>AERO</div>
+            <div></div>
+            <div class="float-icon f4"><div class="ico">🤖</div>ROBO</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Sectors -->
+  <!-- Image Carousel -->
+  <section class="section">
+    <div class="container">
+      <div class="carousel">
+        <div class="carousel-track">
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80');">
+            <div class="carousel-caption">
+              <h3>Semiconductor Excellence</h3>
+              <p>Cutting-edge chip technology driving the digital revolution</p>
+            </div>
+          </div>
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=1600&q=80');">
+            <div class="carousel-caption">
+              <h3>Electric Vehicle Innovation</h3>
+              <p>Powering the future of mobility with advanced BMS & power electronics</p>
+            </div>
+          </div>
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1517976547714-720226b864c1?w=1600&q=80');">
+            <div class="carousel-caption">
+              <h3>Aerospace & Defense</h3>
+              <p>MIL-spec components for mission-critical applications</p>
+            </div>
+          </div>
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=1600&q=80');">
+            <div class="carousel-caption">
+              <h3>Robotics & Automation</h3>
+              <p>Precision components for industrial automation</p>
+            </div>
+          </div>
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=80');">
+            <div class="carousel-caption">
+              <h3>Automotive Systems</h3>
+              <p>ECUs, sensors, and ADAS modules for next-gen vehicles</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn prev" aria-label="Previous">‹</button>
+        <button class="carousel-btn next" aria-label="Next">›</button>
+        <div class="carousel-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Sectors with images -->
   <section class="section section-alt">
     <div class="container">
       <div class="section-head">
@@ -93,27 +137,58 @@
         <h2>Industries we power</h2>
         <p>Trusted by manufacturers and OEMs across the globe for sourcing reliable, high-performance components.</p>
       </div>
-      <div class="grid-4">
-        <div class="card">
-          <div class="card-icon">⚡</div>
-          <h3>Semiconductors</h3>
-          <p>Diodes, rectifiers, MOSFETs, transistors, ICs and microcontrollers from leading global brands.</p>
+      <div class="sector-grid">
+
+        <div class="sector-card">
+          <div class="sector-img" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80');">
+            <div class="sector-img-icon">⚡</div>
+          </div>
+          <div class="sector-body">
+            <h3>Semiconductors</h3>
+            <p>Diodes, MOSFETs, transistors, ICs, and microcontrollers from leading global brands.</p>
+          </div>
         </div>
-        <div class="card">
-          <div class="card-icon">🚗</div>
-          <h3>Electric Vehicles</h3>
-          <p>High-voltage BMS, power modules, motor controllers, and battery cells for next-gen mobility.</p>
+
+        <div class="sector-card">
+          <div class="sector-img" style="background-image: url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80');">
+            <div class="sector-img-icon">🚗</div>
+          </div>
+          <div class="sector-body">
+            <h3>Electric Vehicles</h3>
+            <p>High-voltage BMS, power modules, motor controllers, and battery cells for EV mobility.</p>
+          </div>
         </div>
-        <div class="card">
-          <div class="card-icon">✈️</div>
-          <h3>Aerospace & Defense</h3>
-          <p>MIL-spec connectors, ruggedized passives, and aviation-grade components meeting global standards.</p>
+
+        <div class="sector-card">
+          <div class="sector-img" style="background-image: url('https://images.unsplash.com/photo-1517976547714-720226b864c1?w=800&q=80');">
+            <div class="sector-img-icon">✈️</div>
+          </div>
+          <div class="sector-body">
+            <h3>Aerospace & Defense</h3>
+            <p>MIL-spec connectors, ruggedized passives, and aviation-grade components.</p>
+          </div>
         </div>
-        <div class="card">
-          <div class="card-icon">🤖</div>
-          <h3>Robotics & Automation</h3>
-          <p>High-torque servos, actuators, robotic controllers, and precision sensors for industrial automation.</p>
+
+        <div class="sector-card">
+          <div class="sector-img" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80');">
+            <div class="sector-img-icon">🚙</div>
+          </div>
+          <div class="sector-body">
+            <h3>Automobile</h3>
+            <p>ECUs, sensors, ADAS modules, and AEC-Q100 qualified parts for OEMs and Tier-1 suppliers.</p>
+          </div>
         </div>
+
+        <div class="sector-card">
+          <div class="sector-img" style="background-image: url('https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=800&q=80');">
+            <div class="sector-img-icon">🤖</div>
+          </div>
+          <div class="sector-body">
+            <h3>Robotics & Automation</h3>
+            <p>High-torque servos, actuators, robotic controllers, and precision sensors.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -160,7 +235,7 @@
     </div>
   </section>
 
-  <!-- CTA Strip -->
+  <!-- CTA -->
   <section class="section section-alt" style="text-align:center; padding: 4rem 0;">
     <div class="container">
       <h2>Have a sourcing requirement?</h2>
@@ -169,33 +244,33 @@
     </div>
   </section>
 
-  <!-- Floating Contact Buttons -->
+  <!-- Floating contacts + Chatbot -->
   <div class="floating-contacts">
     <a href="https://wa.me/917989269904?text=Hello%20Melanu%20Technologies,%20I%20have%20an%20enquiry." target="_blank" class="float-btn float-whatsapp" title="WhatsApp">💬</a>
     <a href="tel:+917989269904" class="float-btn float-call" title="Call us">📞</a>
     <button id="botBtn" class="float-btn float-bot" title="AI Assistant">🤖</button>
   </div>
 
-  <!-- AI Chatbot -->
   <div id="chatbot" class="chatbot">
     <div class="chatbot-head">
-      <div>
-        <h4>Melanu Assistant</h4>
-        <small>● Online · Replies in seconds</small>
+      <div class="chatbot-head-info">
+        <div class="chatbot-avatar">🤖</div>
+        <div><h4>Melanu AI Assistant</h4><small>Online · Powered by Claude AI</small></div>
       </div>
       <button id="chatbotClose" class="chatbot-close">✕</button>
     </div>
     <div class="chatbot-body">
-      <div class="chat-msg bot">
-        <div class="bubble">👋 Hi! I'm the Melanu assistant. How can I help you today?</div>
-      </div>
+      <div class="chat-msg bot"><div class="bubble">👋 Hello! I'm the Melanu AI assistant. Ask me about our products, sectors, or get a quote.</div></div>
     </div>
     <div class="chat-quick">
-      <button data-action="products">Our Products</button>
-      <button data-action="sectors">Sectors</button>
-      <button data-action="quote">Get Quote</button>
-      <button data-action="whatsapp">WhatsApp</button>
-      <button data-action="contact">Contact Info</button>
+      <button>Our products</button>
+      <button>Get a quote</button>
+      <button>WhatsApp us</button>
+      <button>Sectors we serve</button>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" class="chat-input" placeholder="Type a message..." autocomplete="off">
+      <button id="chatSend" class="chat-send" title="Send">➤</button>
     </div>
   </div>
 
@@ -205,10 +280,10 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">
-            <img src="logo.svg" alt="Melanu" style="height: 38px;">
-            <div class="logo-text" style="color: var(--white);">MELANU<span style="color: var(--green-400);">TECHNOLOGIES</span></div>
+            <img src="logo.svg" alt="Melanu" style="height: 40px; width: 40px;">
+            <div class="logo-text" style="color: var(--white);">MELANU<span style="color: var(--green-300);">TECHNOLOGIES</span></div>
           </div>
-          <p>Global sourcing partner for semiconductor, EV, aerospace, and robotics components.</p>
+          <p>Global sourcing partner for semiconductor, EV, aerospace, automobile, and robotics components.</p>
         </div>
         <div>
           <h4>Quick Links</h4>
@@ -232,16 +307,15 @@
         <div>
           <h4>Sectors</h4>
           <ul>
-            <li><a href="products.html">Semiconductors</a></li>
-            <li><a href="products.html">EV Components</a></li>
-            <li><a href="products.html">Aerospace</a></li>
-            <li><a href="products.html">Robotics</a></li>
+            <li>Semiconductors</li>
+            <li>Electric Vehicles</li>
+            <li>Aerospace</li>
+            <li>Automobile</li>
+            <li>Robotics</li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">
-        © 2026 Melanu Technologies Pvt Ltd. All rights reserved.
-      </div>
+      <div class="footer-bottom">© 2026 Melanu Technologies Pvt Ltd. All rights reserved.</div>
     </div>
   </footer>
 

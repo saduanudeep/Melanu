@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products — Melanu Technologies</title>
-  <meta name="description" content="Explore our comprehensive range of semiconductor, EV, aerospace, and robotics components.">
+  <meta name="description" content="Comprehensive range of semiconductor, EV, aerospace, automobile, and robotics components.">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
@@ -14,10 +15,7 @@
 
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="index.html" class="logo">
-        <img src="logo.svg" alt="Melanu" class="logo-symbol">
-        <div class="logo-text">MELANU<span>TECHNOLOGIES PVT LTD</span></div>
-      </a>
+      <a href="index.html" class="logo"><img src="logo.svg" alt="Melanu"><div class="logo-text">MELANU<span>TECHNOLOGIES PVT LTD</span></div></a>
       <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
@@ -32,9 +30,34 @@
     <div class="container">
       <div class="breadcrumb"><a href="index.html">Home</a> / Products</div>
       <h1>Our Product Range</h1>
-      <p>500+ component lines across 4 critical sectors</p>
+      <p>500+ component lines across 5 critical sectors</p>
     </div>
   </header>
+
+  <!-- Carousel banner -->
+  <section style="padding: 3rem 0 0;">
+    <div class="container">
+      <div class="carousel">
+        <div class="carousel-track">
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1631467264549-2bbb3470a4a5?w=1600&q=80');">
+            <div class="carousel-caption"><h3>Active Components</h3><p>Diodes, MOSFETs, ICs from world-leading manufacturers</p></div>
+          </div>
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1597733336794-12d05021d510?w=1600&q=80');">
+            <div class="carousel-caption"><h3>Passive Components</h3><p>Precision resistors, capacitors, and inductors</p></div>
+          </div>
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&q=80');">
+            <div class="carousel-caption"><h3>Power Electronics</h3><p>SiC modules, power MOSFETs, and gate drivers</p></div>
+          </div>
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80');">
+            <div class="carousel-caption"><h3>Microcontrollers</h3><p>From 8-bit MCUs to high-performance MPUs</p></div>
+          </div>
+        </div>
+        <button class="carousel-btn prev">‹</button>
+        <button class="carousel-btn next">›</button>
+        <div class="carousel-dots"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- Semiconductors -->
   <section class="section section-alt">
@@ -47,75 +70,27 @@
       <div class="grid-3">
         <div class="product-card">
           <div class="product-header"><h3>Diodes & Rectifiers</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Schottky Diodes</li>
-              <li>Zener Diodes</li>
-              <li>Bridge Rectifiers</li>
-              <li>Fast Recovery Diodes</li>
-              <li>TVS Diodes</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Schottky Diodes</li><li>Zener Diodes</li><li>Bridge Rectifiers</li><li>Fast Recovery Diodes</li><li>TVS Diodes</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Transistors & MOSFETs</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Power MOSFETs</li>
-              <li>BJT (NPN / PNP)</li>
-              <li>IGBT Modules</li>
-              <li>JFET / Dual MOSFET</li>
-              <li>SiC & GaN Transistors</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Power MOSFETs</li><li>BJT (NPN / PNP)</li><li>IGBT Modules</li><li>JFET / Dual MOSFET</li><li>SiC & GaN Transistors</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Integrated Circuits</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Microcontrollers (MCU)</li>
-              <li>Op-Amps & Comparators</li>
-              <li>Voltage Regulators</li>
-              <li>ADCs / DACs</li>
-              <li>Power Management ICs</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Microcontrollers (MCU)</li><li>Op-Amps & Comparators</li><li>Voltage Regulators</li><li>ADCs / DACs</li><li>Power Management ICs</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Resistors</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>SMD / Through-Hole</li>
-              <li>Precision Resistors</li>
-              <li>Power & Wirewound</li>
-              <li>Variable / Trimmers</li>
-              <li>Current Sense</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>SMD / Through-Hole</li><li>Precision Resistors</li><li>Power & Wirewound</li><li>Variable / Trimmers</li><li>Current Sense</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Capacitors</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Electrolytic</li>
-              <li>Ceramic (MLCC)</li>
-              <li>Tantalum</li>
-              <li>Film Capacitors</li>
-              <li>Supercapacitors</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Electrolytic</li><li>Ceramic (MLCC)</li><li>Tantalum</li><li>Film Capacitors</li><li>Supercapacitors</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Inductors</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Power Inductors</li>
-              <li>Common Mode Chokes</li>
-              <li>RF / High-Frequency</li>
-              <li>Toroidal Inductors</li>
-              <li>SMD Inductors</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Power Inductors</li><li>Common Mode Chokes</li><li>RF / High-Frequency</li><li>Toroidal Inductors</li><li>SMD Inductors</li></ul></div>
         </div>
       </div>
     </div>
@@ -132,36 +107,15 @@
       <div class="grid-3">
         <div class="product-card">
           <div class="product-header"><h3>Battery Management</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>High-Voltage BMS</li>
-              <li>Cell Balancing ICs</li>
-              <li>Battery Monitors</li>
-              <li>Thermal Sensors</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>High-Voltage BMS</li><li>Cell Balancing ICs</li><li>Battery Monitors</li><li>Thermal Sensors</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Power Electronics</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>SiC Power Modules</li>
-              <li>Inverter ICs</li>
-              <li>DC-DC Converters</li>
-              <li>On-Board Chargers</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>SiC Power Modules</li><li>Inverter ICs</li><li>DC-DC Converters</li><li>On-Board Chargers</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Motor Control</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Motor Driver ICs</li>
-              <li>Gate Drivers</li>
-              <li>Current Sensors</li>
-              <li>Encoders & Resolvers</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Motor Driver ICs</li><li>Gate Drivers</li><li>Current Sensors</li><li>Encoders & Resolvers</li></ul></div>
         </div>
       </div>
     </div>
@@ -178,88 +132,83 @@
       <div class="grid-3">
         <div class="product-card">
           <div class="product-header"><h3>MIL-Spec Connectors</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Circular Connectors</li>
-              <li>D-Sub Connectors</li>
-              <li>RF / Coaxial</li>
-              <li>Hermetic Seals</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Circular Connectors</li><li>D-Sub Connectors</li><li>RF / Coaxial</li><li>Hermetic Seals</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Ruggedized Components</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Hi-Rel Resistors</li>
-              <li>Space-Grade Capacitors</li>
-              <li>Vibration-Resistant ICs</li>
-              <li>Wide-Temp Components</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Hi-Rel Resistors</li><li>Space-Grade Capacitors</li><li>Vibration-Resistant ICs</li><li>Wide-Temp Components</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Avionics & Control</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Pressure Sensors</li>
-              <li>Inertial Sensors</li>
-              <li>RF Modules</li>
-              <li>FPGA / Radiation-Hardened</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Pressure Sensors</li><li>Inertial Sensors</li><li>RF Modules</li><li>FPGA / Radiation-Hardened</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Automobile (NEW) -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">SECTOR 04</span>
+        <h2>🚙 Automobile Components</h2>
+        <p>AEC-Q100 qualified parts and automotive-grade systems for OEMs and Tier-1 suppliers.</p>
+      </div>
+      <div class="grid-3">
+        <div class="product-card">
+          <div class="product-header"><h3>ECU & Control Modules</h3></div>
+          <div class="product-body"><ul class="product-list"><li>Engine Control Units</li><li>Transmission ECUs</li><li>Body Control Modules</li><li>Powertrain MCUs</li></ul></div>
+        </div>
+        <div class="product-card">
+          <div class="product-header"><h3>ADAS & Safety</h3></div>
+          <div class="product-body"><ul class="product-list"><li>Radar/LIDAR ICs</li><li>Camera Image Sensors</li><li>Ultrasonic Sensors</li><li>Airbag Control ICs</li></ul></div>
+        </div>
+        <div class="product-card">
+          <div class="product-header"><h3>Sensors</h3></div>
+          <div class="product-body"><ul class="product-list"><li>Pressure Sensors (MAP/MAF)</li><li>Temperature Sensors</li><li>Hall Effect / Position</li><li>Accelerometers / IMUs</li></ul></div>
+        </div>
+        <div class="product-card">
+          <div class="product-header"><h3>Infotainment & Connectivity</h3></div>
+          <div class="product-body"><ul class="product-list"><li>Audio Codecs / DSPs</li><li>Display Drivers</li><li>CAN / LIN Transceivers</li><li>Bluetooth / WiFi Modules</li></ul></div>
+        </div>
+        <div class="product-card">
+          <div class="product-header"><h3>Lighting Systems</h3></div>
+          <div class="product-body"><ul class="product-list"><li>LED Driver ICs</li><li>Matrix Headlight Controllers</li><li>OLED Tail Light Drivers</li><li>Ambient Lighting ICs</li></ul></div>
+        </div>
+        <div class="product-card">
+          <div class="product-header"><h3>Wiring & Connectors</h3></div>
+          <div class="product-body"><ul class="product-list"><li>Automotive Connectors</li><li>Harness Wires (AEC qualified)</li><li>Sealed Terminal Blocks</li><li>HV/LV Distribution</li></ul></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Robotics -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
       <div class="section-head">
-        <span class="section-eyebrow">SECTOR 04</span>
+        <span class="section-eyebrow">SECTOR 05</span>
         <h2>🤖 Robotics & Automation</h2>
         <p>Precision components for industrial and service robotics.</p>
       </div>
       <div class="grid-3">
         <div class="product-card">
           <div class="product-header"><h3>Servos & Actuators</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>High-Torque Servos</li>
-              <li>Linear Actuators</li>
-              <li>Stepper Motors</li>
-              <li>Brushless DC Motors</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>High-Torque Servos</li><li>Linear Actuators</li><li>Stepper Motors</li><li>Brushless DC Motors</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Robotic Controllers</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>Motion Controllers</li>
-              <li>PLC Modules</li>
-              <li>Industrial MCUs</li>
-              <li>Communication ICs (CAN, EtherCAT)</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>Motion Controllers</li><li>PLC Modules</li><li>Industrial MCUs</li><li>EtherCAT / CAN Comms</li></ul></div>
         </div>
         <div class="product-card">
           <div class="product-header"><h3>Sensors & Vision</h3></div>
-          <div class="product-body">
-            <ul class="product-list">
-              <li>LIDAR Modules</li>
-              <li>Image Sensors</li>
-              <li>Force / Torque Sensors</li>
-              <li>Proximity & Distance</li>
-            </ul>
-          </div>
+          <div class="product-body"><ul class="product-list"><li>LIDAR Modules</li><li>Image Sensors</li><li>Force / Torque Sensors</li><li>Proximity & Distance</li></ul></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section-alt" style="text-align:center; padding: 4rem 0;">
+  <section class="section" style="text-align:center; padding: 4rem 0;">
     <div class="container">
       <h2>Need a specific part?</h2>
       <p style="margin-bottom: 2rem; color: var(--ink-500);">Send us your BOM or part numbers — we'll source it.</p>
@@ -267,7 +216,6 @@
     </div>
   </section>
 
-  <!-- Floating Contacts -->
   <div class="floating-contacts">
     <a href="https://wa.me/917989269904?text=Hello%20Melanu%20Technologies,%20I%20have%20an%20enquiry." target="_blank" class="float-btn float-whatsapp" title="WhatsApp">💬</a>
     <a href="tel:+917989269904" class="float-btn float-call" title="Call us">📞</a>
@@ -276,17 +224,19 @@
 
   <div id="chatbot" class="chatbot">
     <div class="chatbot-head">
-      <div><h4>Melanu Assistant</h4><small>● Online</small></div>
+      <div class="chatbot-head-info"><div class="chatbot-avatar">🤖</div><div><h4>Melanu AI Assistant</h4><small>Online · Powered by Claude AI</small></div></div>
       <button id="chatbotClose" class="chatbot-close">✕</button>
     </div>
-    <div class="chatbot-body">
-      <div class="chat-msg bot"><div class="bubble">👋 Hi! Looking for a specific component?</div></div>
-    </div>
+    <div class="chatbot-body"><div class="chat-msg bot"><div class="bubble">👋 Looking for specific components? Ask me!</div></div></div>
     <div class="chat-quick">
-      <button data-action="products">Our Products</button>
-      <button data-action="quote">Get Quote</button>
-      <button data-action="whatsapp">WhatsApp</button>
-      <button data-action="contact">Contact</button>
+      <button>Our products</button>
+      <button>Get a quote</button>
+      <button>WhatsApp us</button>
+      <button>Sectors we serve</button>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" class="chat-input" placeholder="Type a message..." autocomplete="off">
+      <button id="chatSend" class="chat-send">➤</button>
     </div>
   </div>
 
@@ -294,40 +244,12 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo">
-            <img src="logo.svg" alt="Melanu" style="height: 38px;">
-            <div class="logo-text" style="color: var(--white);">MELANU<span style="color: var(--green-400);">TECHNOLOGIES</span></div>
-          </div>
-          <p>Global sourcing partner for semiconductor, EV, aerospace, and robotics components.</p>
+          <div class="logo"><img src="logo.svg" alt="Melanu" style="height: 40px; width: 40px;"><div class="logo-text" style="color: var(--white);">MELANU<span style="color: var(--green-300);">TECHNOLOGIES</span></div></div>
+          <p>Global sourcing partner for semiconductor, EV, aerospace, automobile, and robotics components.</p>
         </div>
-        <div>
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="mailto:sales@melanu.in">sales@melanu.in</a></li>
-            <li><a href="mailto:purchase@melanu.in">purchase@melanu.in</a></li>
-            <li><a href="mailto:info@melanu.in">info@melanu.in</a></li>
-            <li><a href="tel:+917989269904">+91 79892 69904</a></li>
-            <li><a href="tel:+919910550878">+91 99105 50878</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Sectors</h4>
-          <ul>
-            <li>Semiconductors</li>
-            <li>EV Components</li>
-            <li>Aerospace</li>
-            <li>Robotics</li>
-          </ul>
-        </div>
+        <div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div><h4>Contact</h4><ul><li><a href="mailto:sales@melanu.in">sales@melanu.in</a></li><li><a href="mailto:purchase@melanu.in">purchase@melanu.in</a></li><li><a href="mailto:info@melanu.in">info@melanu.in</a></li><li><a href="tel:+917989269904">+91 79892 69904</a></li><li><a href="tel:+919910550878">+91 99105 50878</a></li></ul></div>
+        <div><h4>Sectors</h4><ul><li>Semiconductors</li><li>Electric Vehicles</li><li>Aerospace</li><li>Automobile</li><li>Robotics</li></ul></div>
       </div>
       <div class="footer-bottom">© 2026 Melanu Technologies Pvt Ltd. All rights reserved.</div>
     </div>
