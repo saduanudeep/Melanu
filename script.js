@@ -7,7 +7,7 @@ const WHATSAPP_PRIMARY = '917989269904';
 const WHATSAPP_SECONDARY = '919910550878';
 
 // AI Chatbot endpoint - this is your Cloudflare Worker URL (set this AFTER deploying the worker)
-const AI_CHAT_URL = 'https://melanu-chatbot.saduanudeep.workers.dev';
+const AI_CHAT_URL = 'https://melanu-chatbot.sadu-anudeep.workers.dev';
 
 // Conversation history for AI context
 let chatHistory = [];
